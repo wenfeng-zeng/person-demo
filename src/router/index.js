@@ -8,8 +8,31 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+      name: 'index',
+      component: () => import('@/view/index.vue')
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: () => import('@/view/home.vue'),
+      redirect: '/resume',
+      children: [
+        {
+          path: '/resume',
+          name: 'resume',
+          component: () => import('@/view/resume.vue')
+        },
+        {
+          path: '/fontDemo',
+          name: 'fontDemo',
+          component: () => import('@/view/demo/fontDemo.vue')
+        },
+        {
+          path: '/lightDemo',
+          name: 'lightDemo',
+          component: () => import('@/view/demo/lightDemo.vue')
+        },
+      ]
+    },
   ]
 })
