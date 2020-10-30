@@ -8,10 +8,80 @@
   <link rel='stylesheet prefetch'
     href='https://fonts.googleapis.com/css?family=Bad+Script|Gruppo|Kumar+One+Outline|League+Script|Londrina+Outline|Monoton|Sriracha|Yellowtail&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789?+'>
 </head>
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 
 <body>
-  <div id="app"></div>
+  <!-- <div id="app"> -->
+  <button class="clickbtn">123</button>
+  <wx-open-launch-weapp id="launch-btn" username="gh_06c4b7ded342" path="pages/home/index/index.html">
+    <template>
+      <style>
+        .btn {
+          color: #fff;
+          font-size: 18px;
+          text-align: center;
+          width: 206px;
+          height: 44px;
+          line-height: 44px;
+          margin: 53px auto;
+          background-color: #572b8c;
+          border-radius: 30px;
+          letter-spacing: 2px;
+        }
+      </style>
+      <div class="btn">跳转小程序</div>
+    </template>
+
+  </wx-open-launch-weapp>
+  <!-- </div> -->
+  <div id="app">
+  </div>
   <!-- built files will be auto injected -->
 </body>
+<script type="text/javascript">
+  let clickbtn = document.getElementsByClassName('clickbtn')[0]
+  console.log(clickbtn)
+  clickbtn.onclick = function () {
+    console.log(123)
+    wx.config({
+      debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
+      appId: 'wx840e58a464440e10	', // 必填，公众号的唯一标识
+      timestamp: '1414587457', // 必填，生成签名的时间戳
+      nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串
+      signature: 'Wm3WZYTPz0wzccnW',// 必填，签名
+      jsApiList: [], // 必填，需要使用的JS接口列表
+      openTagList: ['wx-open-launch-weapp'] // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
+    })
+    wx.ready(function (res) {
+      console.log(res, '---res')
+    })
+    wx.error(function (res) {
+      // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名
+      console.log(res)
+    });
+  }
+  // onload = function () {
+  //   // wx.ready(function (res) {
+  //   wx.config({
+  //     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
+  //     appId: 'wx840e58a464440e10	', // 必填，公众号的唯一标识
+  //     timestamp: '1414587457', // 必填，生成签名的时间戳
+  //     nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串
+  //     signature: 'Wm3WZYTPz0wzccnW',// 必填，签名
+  //     jsApiList: [], // 必填，需要使用的JS接口列表
+  //     openTagList: ['wx-open-launch-weapp'] // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
+  //   })
+  //   // console.log(res, '---res')
+
+  //   // })
+  //   wx.ready(function (res) {
+  //     console.log(res, '---res')
+  //   })
+  //   wx.error(function (res) {
+  //     // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名
+  //     console.log(res)
+  //   });
+  // }
+</script>
 
 </html>

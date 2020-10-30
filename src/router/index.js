@@ -8,15 +8,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: () => import('@/view/index.vue')
-    },
-    {
-      path: '/home',
       name: 'home',
       component: () => import('@/view/home.vue'),
       redirect: '/resume',
       children: [
+        {
+          path: '/loading',
+          name: 'loading',
+          component: () => import('@/view/demo/index.vue')
+        },
         {
           path: '/resume',
           name: 'resume',
@@ -31,6 +31,16 @@ export default new Router({
           path: '/lightDemo',
           name: 'lightDemo',
           component: () => import('@/view/demo/lightDemo.vue')
+        },
+        {
+          path: '/account',
+          name: 'account',
+          component: () => import('@/view/project/account.vue')
+        },
+        {
+          path: '/payment',
+          name: 'payment',
+          component: () => import('@/view/project/payment.vue')
         },
       ]
     },

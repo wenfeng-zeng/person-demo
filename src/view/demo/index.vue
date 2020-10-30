@@ -24,9 +24,6 @@
         <span style="--i:20"></span>
       </div>
     </section>
-    <div class="btn">
-      <span>{{seconds}}</span>秒
-    </div>
   </div>
 </template>
 
@@ -39,14 +36,6 @@ export default {
     }
   },
   mounted () {
-    let _this = this
-    _this.seconds = 3
-    this.timer = setInterval(() => {
-      _this.seconds--
-      if (_this.seconds === 0) {
-        clearInterval(_this.timer)
-      }
-    }, 1000)
   }
 }
 </script>
@@ -56,7 +45,7 @@ section {
   box-sizing: border-box;
   height: 100vh;
   max-height: 100vh;
-  background-color: #000;
+  background-color: #fff;
   position: relative;
   /* animation: bgcAnimation 1s linear infinite; */
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="lightDemo" @mousemove="handerMove">
+  <div class="lightDemo" @mousemove="handerMove" @touchMove="handerMove">
     <h3>searchingLight</h3>
     <div class="circle"></div>
   </div>
