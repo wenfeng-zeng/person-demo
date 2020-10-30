@@ -5,6 +5,12 @@
                 <div class="btn">跳转小程序</div>
         <script> -->
     <!-- </wx-open-launch-weapp> -->
+    <!-- <wx-open-launch-weapp id="launch-btn" username="gh_06c4b7ded342" path="pages/home/index/index.html" @error="handleErrorFn" @launch="handleLaunchFn">
+      <script type="text/wxtag-template">
+        <style>.btn { display: flex;align-items: center; }</style>                              
+            <div> <button class="wx-btn">跳转小程序</button>   </div>            
+        </script>
+    </wx-open-launch-weapp> -->
   </div>
 </template>
 <script>
@@ -34,6 +40,14 @@ export default {
     //     openTagList: ['wx-open-launch-weapp'] // 可选，需要使用的开放标签列表，例如['wx-open-launch-app']
     //   })
     // })
+  },
+  methods: {
+    handleErrorFn (e) {
+      console.log('fail', e.detail);
+    },
+    handleLaunchFn (e) {
+      console.log('success');
+    }
   }
 }
 </script>
