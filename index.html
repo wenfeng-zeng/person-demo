@@ -42,8 +42,9 @@
 </body>
 <script type="text/javascript">
   onload = function () {
+    console.log(123, wx)
     wx.miniProgram.navigateTo({
-      url: '/pages/home/index/index?id=xxx',
+      url: 'pages/home/index/index?id=xxx',
       success: function () {
         console.log('success')
       },
