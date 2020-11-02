@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div class="btn" @click="handerClick">跳转小程序</div>
     <!-- <wx-open-launch-weapp id="launch-btn" username="gh_06c4b7ded342" path="pages/home/index/index.html"> -->
     <!-- <script type="text/wxtag-template">
                 <div class="btn">跳转小程序</div>
@@ -18,19 +19,19 @@
 // import wx from 'weixin-js-sdk'
 export default {
   created () {
-    wx.miniProgram.navigateTo({
-      appId: 'wx840e58a464440e10',
-      url: 'pages/home/index/index?id=xxx',
-      success: function () {
-        console.log('success')
-      },
-      fail: function () {
-        console.log('fail');
-      },
-      complete: function () {
-        console.log('complete');
-      }
-    })
+    // wx.miniProgram.navigateTo({
+    //   appId: 'wx840e58a464440e10',
+    //   url: 'pages/home/index/index?id=xxx',
+    //   success: function () {
+    //     console.log('success')
+    //   },
+    //   fail: function () {
+    //     console.log('fail');
+    //   },
+    //   complete: function () {
+    //     console.log('complete');
+    //   }
+    // })
     // console.log(wx)
     // wx.config({
     //   debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印
@@ -60,6 +61,21 @@ export default {
     },
     handleLaunchFn (e) {
       console.log('success');
+    },
+    handerClick () {
+      wx.miniProgram.navigateTo({
+        appId: 'wx840e58a464440e10',
+        url: '/pages/home/index/index?id=xxx',
+        success: function () {
+          console.log('success')
+        },
+        fail: function () {
+          console.log('fail');
+        },
+        complete: function () {
+          console.log('complete');
+        }
+      })
     }
   }
 }
