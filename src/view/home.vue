@@ -65,8 +65,8 @@ export default {
       console.log('success');
     },
     handerClick () {
-      wx.miniProgram.navigateTo({
-        appId: 'wx840e58a464440e10',
+      console.log('1');
+      wx.miniProgram.switchTab({
         url: '/pages/home/index/index?id=xxx',
         success: function () {
           console.log('success')
