@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div class="btn" @click="handerClick">跳转小程序</div>
+    <div class="btn" @click="handerBack">handerBack</div>
     <!-- <wx-open-launch-weapp id="launch-btn" username="gh_06c4b7ded342" path="pages/home/index/index.html"> -->
     <!-- <script type="text/wxtag-template">
                 <div class="btn">跳转小程序</div>
@@ -19,6 +20,7 @@
 // import wx from 'weixin-js-sdk'
 export default {
   created () {
+    console.log(123, wx)
     // wx.miniProgram.navigateTo({
     //   appId: 'wx840e58a464440e10',
     //   url: 'pages/home/index/index?id=xxx',
@@ -76,6 +78,9 @@ export default {
           console.log('complete');
         }
       })
+    },
+    handerBack () {
+      wx.miniProgram.navigateBack()
     }
   }
 }
