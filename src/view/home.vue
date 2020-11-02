@@ -19,6 +19,7 @@
 export default {
   created () {
     wx.miniProgram.navigateTo({
+      appId: 'wx840e58a464440e10',
       url: 'pages/home/index/index?id=xxx',
       success: function () {
         console.log('success')
