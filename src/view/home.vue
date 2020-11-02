@@ -21,7 +21,7 @@
 export default {
   created () {
     console.log(123, wx)
-    this.handerClick()
+    this.handerBack()
     // wx.miniProgram.navigateTo({
     //   appId: 'wx840e58a464440e10',
     //   url: 'pages/home/index/index?id=xxx',
