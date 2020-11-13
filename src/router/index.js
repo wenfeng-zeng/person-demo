@@ -33,6 +33,11 @@ export default new Router({
           component: () => import('@/view/demo/lightDemo.vue')
         },
         {
+          path: '/test',
+          name: 'test',
+          component: () => import('@/view/demo/test.vue')
+        },
+        {
           path: '/account',
           name: 'account',
           component: () => import('@/view/project/account.vue')

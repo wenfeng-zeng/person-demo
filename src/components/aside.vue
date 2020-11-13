@@ -28,6 +28,7 @@
         <el-menu-item index="/fontDemo">font-demo</el-menu-item>
         <el-menu-item index="/lightDemo">light-demo</el-menu-item>
         <el-menu-item index="/loading">loading-demo</el-menu-item>
+        <el-menu-item index="/test">test-demo</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>
