@@ -3,12 +3,12 @@ import qs from 'qs'
 import { MessageBox } from 'element-ui'
 // import store from '../store/store.js'
 axios.defaults.timeout = 60000
-let urls
-if (process.env.NODE_ENV === 'development') {
-  urls = '/api'
-} else {
-  urls = ''
-}
+let urls = '/api'
+// if (process.env.NODE_ENV === 'development') {
+//   urls = '/api'
+// } else {
+//   urls = ''
+// }
 // var urlData
 // let needRequestCount = 0
 axios.interceptors.request.use(function (config) {
