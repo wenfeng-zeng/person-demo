@@ -2,6 +2,8 @@
   <div class="test">
     <h2 @click="getRequest">向服务器发送get请求---- + {{get}}</h2>
     <h2 @click="statisticalForHome">向服务器发送post请求---- + {{post}}</h2>
+    <h2 @click="getList">奖品列表</h2>
+    <h2 @click="getPrize">抽奖</h2>
   </div>
 </template>
 
@@ -25,6 +27,22 @@ export default {
     statisticalForHome () {
       statisticalForHome('/postIndex', {}).then(res => {
         this.post = res
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    getList () {
+      statisticalForHome('/prizeList', {}).then(res => {
+        // this.post = res
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    getPrize () {
+      statisticalForHome('/getPrize', {}).then(res => {
+        // this.post = res
+        console.log(res)
       }).catch(err => {
         console.log(err)
       })
