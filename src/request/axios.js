@@ -4,11 +4,12 @@ import { MessageBox } from 'element-ui'
 // import store from '../store/store.js'
 axios.defaults.timeout = 60000
 let urls = '/api'
-// if (process.env.NODE_ENV === 'development') {
-//   urls = '/api'
-// } else {
-//   urls = ''
-// }
+// let urls1 = '/node'
+if (process.env.NODE_ENV === 'development') {
+  urls = '/node'
+} else {
+  urls = 'api'
+}
 // var urlData
 // let needRequestCount = 0
 axios.interceptors.request.use(function (config) {
@@ -87,11 +88,38 @@ export default {
       })
     })
   },
+  getRequest1 (url, data) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'get',
+        url: urls1 + url,
+        params: data
+      }).then(res => {
+        resolve(res.data)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
   postRequest (url, data) {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
         url: urls + url,
+        data,
+        headers: { 'Content-Type': 'application/json;charset=UTF-8' }
+      }).then(res => {
+        resolve(res.data)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+  postRequest1 (url, data) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'post',
+        url: urls1 + url,
         data,
         headers: { 'Content-Type': 'application/json;charset=UTF-8' }
       }).then(res => {

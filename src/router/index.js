@@ -34,6 +34,11 @@ export default new Router({
           component: () => import('@/view/demo/lightDemo.vue')
         },
         {
+          path: '/snow',
+          name: 'snow',
+          component: () => import('@/view/demo/snow.vue')
+        },
+        {
           path: '/test',
           name: 'test',
           component: () => import('@/view/demo/test.vue')

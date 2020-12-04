@@ -13,12 +13,27 @@
         <img src="../../assets/indiana_one.png" alt="" srcset="">
       </div>
     </div>
+    <div class="history">
+      <el-table border :data="tableData">
+        <el-table-column align="center" prop="id" label="抽奖号"> </el-table-column>
+        <el-table-column align="center" prop="date" label="日期"> </el-table-column>
+        <el-table-column align="center" prop="name" label="奖品"> </el-table-column>
+        <el-table-column align="center" prop="count" label="数量"> </el-table-column>
+      </el-table>
+      <div class="pagination">
+        <page :currentPage="currentPage" :pageSize="pageSize" :total="total" @sizeChange="handleSizeChange" @pageChange="handleCurrentChange"></page>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { statisticalForHome, getRequest } from '@/request/home'
+import page from '@/components/page'
 export default {
+  components: {
+    page
+  },
   data () {
     return {
       prizeList: [],
@@ -26,17 +41,40 @@ export default {
       timer: null,
       timeSpeed: 40,
       scollNum: 0,
-      index: 0
+      index: 0,
+      tableData: [],
+      currentPage: 1,
+      pageSize: 5,
+      pageOptions: ['5', '10', '30', '50'],
+      total: 0
     }
   },
   created () {
     this.getList()
+    this.getHistory(this.currentPage, this.pageSize)
   },
   methods: {
+    getHistory (pageNum, pageSize) {
+      let params = {
+        pageNum,
+        pageSize
+      }
+      getRequest('/getPrizeHistory', params).then(res => {
+        if (res.code === 200) {
+          this.tableData = res.data
+          this.total = res.count[0]['count(*)']
+          this.tableData.forEach(e => {
+            e.date = this.getTime(e.date)
+          })
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     getList () {
       statisticalForHome('/prizeList', {}).then(res => {
         // this.post = res
-        this.prizeList = res.data.list
+        this.prizeList = res.data
       }).catch(err => {
         console.log(err)
       })
@@ -48,7 +86,7 @@ export default {
       }
       statisticalForHome('/getPrize', {}).then(res => {
         console.log(res.data.name)
-        if (res.code === 0) {
+        if (res.code === 200) {
           this.isPrize += 1
           let result = res.data
           let index = this.prizeList.findIndex(e => {
@@ -69,20 +107,47 @@ export default {
         if (_this.index > count - 1) {
           _this.index = 0
         }
-        if (_this.scollNum >= 20 * count && _this.index === index) {
+        if (_this.index === index && _this.scollNum >= 18 * count) {
           _this.isPrize = 0
           _this.timeSpeed = 40
           _this.scollNum = 0
-          clearInterval(_this.timer)
+          clearTimeout(_this.timer)
+          _this.getHistory(_this.currentPage, _this.pageSize)
+          _this.$alert(`${_this.prizeList[index].name}`, '提醒', {
+            confirmButtonText: '确定'
+          });
         } else {
-          if (_this.scollNum >= 19 * count) {
-            _this.timeSpeed += 20
-          } else if (_this.scollNum >= 15 * count) {
-            _this.timeSpeed += 4
+          if (_this.scollNum >= 17 * count) {
+            _this.timeSpeed += 30
+          } else if (_this.scollNum >= 16 * count) {
+            _this.timeSpeed += 10
+          } else if (_this.scollNum >= 13 * count) {
+            _this.timeSpeed += 5
           }
           _this.startScoll(index)
         }
       }, _this.timeSpeed)
+    },
+    getTime (time) {
+      let newDay = new Date(Number(time))
+      let y = newDay.getFullYear()
+      let m = newDay.getMonth() + 1
+      let d = newDay.getDate()
+      let h = newDay.getHours()
+      let mm = newDay.getMinutes()
+      let ss = newDay.getSeconds()
+      if (m < 10) m = '0' + m
+      if (d < 10) d = '0' + d
+      return `${y}-${m}-${d} ${h}:${mm}:${ss}`
+    },
+    handleSizeChange (val) {
+      this.pageSize = val
+      this.currentPage = 1
+      this.getHistory(this.currentPage, this.pageSize)
+    },
+    handleCurrentChange (val) {
+      this.currentPage = val
+      this.getHistory(this.currentPage, this.pageSize)
     }
   }
 }
@@ -92,13 +157,17 @@ export default {
 .prize {
   margin: 0;
   padding: 0;
-  width: 600px;
-  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  margin-right: 200px;
+  margin-top: 100px;
   .box {
     width: 396px;
+    // width: 600px;
+    margin-left: 100px;
     background: url("../../assets/findTreasureRecord_bounced.png") no-repeat;
     height: 500px;
-    position: relative;
+    // position: relative;
     background-size: 100%;
     .list {
       ul {
@@ -159,8 +228,8 @@ export default {
       }
     }
     .btn {
-      position: absolute;
-      top: 250px;
+      position: relative;
+      top: -120px;
       left: 31%;
       width: 132px;
       height: 120px;
@@ -168,6 +237,24 @@ export default {
         width: 100%;
         text-align: center;
       }
+    }
+  }
+  .history {
+    margin: 20px 20px 20px 20px;
+    // border: 1px solid #ebeef5; /*no*/
+    /deep/.el-table {
+      width: 800px;
+      .has-gutter {
+        th {
+          background-color: #f4f9ff !important;
+        }
+      }
+    }
+    .pagination {
+      display: flex;
+      justify-content: flex-end;
+      background-color: #f4f9ff;
+      padding-bottom: 10px;
     }
   }
 }
