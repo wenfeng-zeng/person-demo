@@ -138,6 +138,9 @@ export default {
       let ss = newDay.getSeconds()
       if (m < 10) m = '0' + m
       if (d < 10) d = '0' + d
+      if (h < 10) h = '0' + h
+      if (mm < 10) mm = '0' + mm
+      if (ss < 10) ss = '0' + ss
       return `${y}-${m}-${d} ${h}:${mm}:${ss}`
     },
     handleSizeChange (val) {
@@ -154,17 +157,29 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.rem (@name,@px) {
+  //   @{name} : unit(@px  /  75, rem);
+  @{name}: unit(@px / 16, rem);
+}
+/**最大媒体宽度**/
 .prize {
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: space-around;
-  margin-right: 200px;
   margin-top: 100px;
+  @media screen and (max-width: 1300px) {
+    flex-direction: column;
+    align-items: center;
+    margin-right: 0px;
+  }
   .box {
     width: 396px;
     // width: 600px;
     margin-left: 100px;
+    @media screen and (max-width: 500px) {
+      margin-left: 0;
+    }
     background: url("../../assets/findTreasureRecord_bounced.png") no-repeat;
     height: 500px;
     // position: relative;
@@ -242,6 +257,12 @@ export default {
   .history {
     margin: 20px 20px 20px 20px;
     // border: 1px solid #ebeef5; /*no*/
+    @media screen and (max-width: 500px) {
+      width: 100%;
+      /deep/.el-table {
+        width: 100%;
+      }
+    }
     /deep/.el-table {
       width: 800px;
       .has-gutter {
@@ -255,6 +276,9 @@ export default {
       justify-content: flex-end;
       background-color: #f4f9ff;
       padding-bottom: 10px;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
     }
   }
 }

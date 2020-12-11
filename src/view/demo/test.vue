@@ -51,5 +51,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+@media screen and (max-width: 1750px) {
+  .test {
+    background-color: red;
+  }
+}
+@media screen and (max-width: 768px) {
+  .test {
+    background-color: #00ff66;
+  }
+}
 </style>

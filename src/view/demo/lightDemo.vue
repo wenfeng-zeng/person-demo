@@ -18,7 +18,7 @@ export default {
   methods: {
     handerMove (e) {
       // const doc = document.documentElement
-      this.doc.style.setProperty('--x', e.clientX - 220 + 'px')
+      this.doc.style.setProperty('--x', e.clientX + 'px')
       this.doc.style.setProperty('--y', e.clientY + 'px')
     }
   }

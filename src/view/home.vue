@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <el-container>
-      <!-- <el-header>
-        <Header></Header>
-      </el-header> -->
-      <el-aside style="width:200px;">
-        <Aside class="aside" :asideMune="meneList"></Aside>
-        <!-- <Aside class="aside"></Aside> -->
-      </el-aside>
-      <!-- 内容区 -->
-      <el-main style="padding:0;">
-        <router-view></router-view>
-      </el-main>
-    </el-container>
+    <template v-if="!_isMobile">
+      <el-container>
+        <div class="aside">
+          <Aside></Aside>
+        </div>
+        <el-main style="padding:0;">
+          <router-view></router-view>
+        </el-main>
+      </el-container>
+    </template>
+    <template v-else>
+      <router-view></router-view>
+    </template>
   </div>
 </template>
 
@@ -27,11 +27,28 @@ export default {
   },
   data () {
     return {
-      meneList: []
+      meneList: [],
+      _isMobile: null
     }
-  }
+  },
+  created () {
+    console.log(this.$utils._isMobile())
+    this._isMobile = this.$utils._isMobile()
+    if (this._isMobile) this.$router.push({
+      path: '/phoneHome'
+    })
+  },
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.home {
+  // background-color: #464c5b;
+}
+.aside {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
 </style>

@@ -1,10 +1,15 @@
 <template>
   <div class="aside">
-    <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-      <el-radio-button :label="false">展开</el-radio-button>
-      <el-radio-button :label="true">收起</el-radio-button>
-    </el-radio-group>
-    <el-menu :default-active="onroutes" class="el-menu-vertical-demo" unique-opened router @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <!-- <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+      <el-tab-pane label="简历" name="resume"></el-tab-pane>
+      <el-tab-pane label="项目简介" name="account"></el-tab-pane>
+      <el-tab-pane label="fontDemo" name="fontDemo"></el-tab-pane>
+      <el-tab-pane label="lightDemo" name="lightDemo"></el-tab-pane>
+      <el-tab-pane label="loading" name="loading"></el-tab-pane>
+      <el-tab-pane label="prize" name="prize"></el-tab-pane>
+      <el-tab-pane label="test" name="test"></el-tab-pane>
+    </el-tabs> -->
+    <el-menu :default-active="onroutes" class="el-menu-vertical-demo" mode="horizontal" unique-opened router @open="handleOpen" @close="handleClose" :collapse="isCollapse">
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-user"></i>
@@ -40,7 +45,8 @@
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      activeName: 'resume'
     }
   },
   computed: {
@@ -50,7 +56,11 @@ export default {
   },
   methods: {
     handleOpen () { },
-    handleClose () { }
+    handleClose () { },
+    handleClick () {
+      if (this.$route.path === '/' + this.activeName) return
+      this.$router.push({ path: '/' + this.activeName })
+    }
   }
 }
 </script>
@@ -58,7 +68,8 @@ export default {
 <style lang="less" scoped>
 @deep: ~">>>";
 .aside {
-  width: 200px;
+  // width: 200px;
+  // position: relative;
   @{deep}.el-menu {
     // /deep/.el-menu-item {
     overflow: hidden;

@@ -9,19 +9,29 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: '',
+      redirect: '/login',
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/view/login.vue'),
+    },
+    {
+      path: '/home',
       name: 'home',
       component: () => import('@/view/home.vue'),
       redirect: '/resume',
       children: [
         {
-          path: '/loading',
-          name: 'loading',
-          component: () => import('@/view/demo/index.vue')
-        },
-        {
           path: '/resume',
           name: 'resume',
           component: () => import('@/view/resume.vue')
+        },
+        {
+          path: '/loading',
+          name: 'loading',
+          component: () => import('@/view/demo/index.vue')
         },
         {
           path: '/fontDemo',
@@ -58,7 +68,24 @@ export default new Router({
           name: 'payment',
           component: () => import('@/view/project/payment.vue')
         },
+        {
+          path: '/phoneHome',
+          name: 'phoneHome',
+          component: () => import('@/view/phone/phoneHome.vue'),
+          children: [
+            {
+              path: '/phoneHome/phonePrize',
+              name: 'phonePrize',
+              component: () => import('@/view/phone/phonePrize.vue'),
+            },
+            {
+              path: '/phoneHome/phoneInfo',
+              name: 'phoneInfo',
+              component: () => import('@/view/phone/phoneInfo.vue'),
+            },
+          ]
+        }
       ]
-    },
+    }
   ]
 })

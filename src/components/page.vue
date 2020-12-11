@@ -40,6 +40,9 @@ export default {
 <style lang="less" scoped>
 .page {
   margin-top: 10px;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
   /deep/.el-pager {
     .number.active {
       background-color: #4a9dd7 !important;

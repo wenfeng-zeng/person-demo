@@ -1,8 +1,6 @@
 <template>
-  <div class="header">
-    <div class="name">
-
-    </div>
+  <div class="phoneInfo">
+    phoneInfo
   </div>
 </template>
 
@@ -13,7 +11,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.header {
-  // background-color: ;
-}
 </style>

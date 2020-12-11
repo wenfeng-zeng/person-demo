@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import { MessageBox } from 'element-ui'
-// import store from '../store/store.js'
+import store from '../store/store.js'
 axios.defaults.timeout = 60000
 let urls = '/api'
 // let urls1 = '/node'
@@ -13,15 +13,15 @@ if (process.env.NODE_ENV === 'development') {
 // var urlData
 // let needRequestCount = 0
 axios.interceptors.request.use(function (config) {
-  // let token = store.state.token
+  let token = store.state.token
   // let urlList = ['account-admin-web/login', 'account-admin-web/updateUserPassWord', 'account-admin-web/checkVerificationCode', 'account-admin-web/sendSmsCode ', 'account-admin-web/checkUser']
   // let isLogin = true
   // urlList.forEach(e => {
   //   if (config.url.includes(e)) isLogin = false
   // })
-  // if (token && isLogin) {
-  //   config.headers['Authorization'] = token
-  // }
+  if (token) {
+    config.headers['Authorization'] = token
+  }
   // needRequestCount++
   return config
 }, function (error) {

@@ -26,6 +26,13 @@ module.exports = {
           '^/node': ''
         }
       },
+      '/files': {
+        target: 'https://wfz-person.cn/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/files': ''
+        }
+      },
     },
 
     // Various Dev Server settings
