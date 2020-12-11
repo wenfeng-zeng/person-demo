@@ -55,8 +55,8 @@ export default {
     }
   },
   mounted () {
-    let urls = process.env.NODE_ENV === 'development' ? 'node' : ''
-    particlesJS.load('particles', urls + '/getParticlesJson', function () {
+    let urls = process.env.NODE_ENV === 'development' ? 'node/getParticlesJson' : './static/particles.json'
+    particlesJS.load('particles', urls, function () {
       console.log('callback - particles-js config loaded');
     });
   },
