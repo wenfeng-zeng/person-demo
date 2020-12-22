@@ -2,9 +2,9 @@
   <div class="home">
     <template v-if="!_isMobile">
       <el-container>
-        <div class="aside">
+        <!-- <div class="aside">
           <Aside></Aside>
-        </div>
+        </div> -->
         <el-main style="padding:0;">
           <router-view></router-view>
         </el-main>

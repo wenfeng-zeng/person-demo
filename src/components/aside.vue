@@ -36,6 +36,7 @@
         <el-menu-item index="/test">test-demo</el-menu-item>
         <el-menu-item index="/prize">prize-demo</el-menu-item>
         <el-menu-item index="/snow">snow-demo</el-menu-item>
+        <el-menu-item index="/test1">test1-demo</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>

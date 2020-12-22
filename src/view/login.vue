@@ -17,7 +17,7 @@
               <div class="userData">
                 <i class="icon"> </i>
                 <!-- eslint-disable-next-line vue/valid-v-on -->
-                <el-input type="password" v-model="ruleForm2.password" auto-complete="off" placeholder="请输入密码" class="inoutt" @keyup.enter.native="handleSubmit">
+                <el-input type="password" v-model="ruleForm2.password" auto-complete="off" show-password placeholder="请输入密码" class="inoutt" @keyup.enter.native="handleSubmit">
                 </el-input>
               </div>
             </el-form-item>
@@ -40,8 +40,8 @@ export default {
   data () {
     return {
       ruleForm2: {
-        userName: 'admin',
-        password: 'admin123'
+        userName: '',
+        password: ''
       },
       rules: {
         userName: [

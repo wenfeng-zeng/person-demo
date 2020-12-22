@@ -62,7 +62,7 @@ export default {
       getRequest('/getPrizeHistory', params).then(res => {
         if (res.code === 200) {
           this.tableData = res.data
-          this.total = res.count[0]['count(*)']
+          this.total = res.count['count(*)']
           this.tableData.forEach(e => {
             e.date = this.getTime(e.date)
           })
