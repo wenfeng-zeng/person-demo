@@ -119,7 +119,7 @@ export default {
     }
   },
   mounted () {
-    window.addEventListener('scroll', this.handerScoll, false)
+    window.addEventListener('scroll', this.handerScoll, true)
   },
   methods: {
     handerScoll (e) {
@@ -127,19 +127,16 @@ export default {
       const scrollY = window.scrollY
       const offsetHeight = top_img.offsetHeight
       this.isTop = scrollY - offsetHeight >= 0 ? true : false
+      const scollBox = this.$refs.scoll_box
+      this.navIndex = Math.floor(scollBox.scrollTop / 700)
     },
     handerGo (index) {
-      // var scoll = document.documentElement.scrollTop || document.body.scrollTop || window.pageYOffset
       const ref = this.liData[index].ref
       const domEle = this.$refs[ref]
       this.navIndex = index
-      // const viewBox = this.$refs.viewBox
-      // const resume = this.$refs.resume
       const scollBox = this.$refs.scoll_box
       const top_img = this.$refs.top_img
       scollBox.scrollTop = this.isTop ? domEle.offsetTop - top_img.offsetHeight : domEle.offsetTop - 80 - top_img.offsetHeight
-
-      console.log(scollBox.scrollTop)
     }
   }
 }
