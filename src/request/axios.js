@@ -31,6 +31,14 @@ axios.interceptors.request.use(function (config) {
 })
 
 axios.interceptors.response.use(function (response) {
+  if (response.data.code === 403) {
+    MessageBox.confirm('登录过期，请重新登录!', '登录超时', {
+      confirmButtonText: '确定',
+      type: 'warning'
+    }).then(() => {
+      window.location.href = '/'
+    })
+  }
   // needRequestCount--
   // if (response.data.code === 401) {
   //   needRequestCount++

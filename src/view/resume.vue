@@ -10,11 +10,6 @@
       <div :class="['top_nav', isTop?'fixed':'']">
         <div class="nav_box">
           <ul>
-            <!-- <li class=""  @click="handerGo('person_intro')">个人介绍 </li>
-            <li class="" @click="handerGo('technology')">技术栈</li>
-            <li class="" @click="handerGo('project')">项目介绍</li>
-            <li class="" @click="handerGo('work')">工作经历</li> -->
-            <!-- <li>个人介绍</li> -->
             <li v-for="(item,index) in liData" :key="index" :class="navIndex === index ? 'active' : ''" @click="handerGo(index)">{{item.name}}</li>
           </ul>
         </div>
@@ -30,7 +25,7 @@
                   <span>
                     <i class="iconfont icon-icon-"> </i>姓名：
                   </span>
-                  <span> 曾文烽</span>
+                  <span> {{userInfo.name}}</span>
                 </span>
               </div>
               <div class="info">
@@ -38,7 +33,7 @@
                   <span>
                     <i class="iconfont icon-edu"> </i>学历：
                   </span>
-                  <span> 本科</span>
+                  <span> {{userInfo.education}}</span>
                 </span>
               </div>
               <div class="info">
@@ -46,7 +41,7 @@
                   <span>
                     <i class="iconfont icon-canjiagongzuoshijian"> </i>毕业年月：
                   </span>
-                  <span> 2015-06</span>
+                  <span> {{userInfo.graduateDate}}</span>
                 </span>
               </div>
               <div class="info">
@@ -54,7 +49,7 @@
                   <span>
                     <i class="iconfont icon-logo_school"> </i>学校：
                   </span>
-                  <span> 仲恺农业工程学院</span>
+                  <span> {{userInfo.school}}</span>
                 </span>
 
               </div>
@@ -63,7 +58,7 @@
                   <span>
                     <i class="iconfont icon-zhuanyezhuanyeke"> </i> 专业：
                   </span>
-                  <span> 通信工程</span>
+                  <span> {{userInfo.major}}</span>
                 </span>
               </div>
               <div class="info">
@@ -71,7 +66,7 @@
                   <span>
                     <i class="iconfont icon-shouji"> </i>手机：
                   </span>
-                  <span> 15915886273</span>
+                  <span> {{userInfo.phone}}</span>
                 </span>
               </div>
               <div class="info">
@@ -79,7 +74,7 @@
                   <span>
                     <i class="iconfont icon-youxiang1"> </i>邮箱：
                   </span>
-                  <span> 289515197@qq.com</span>
+                  <span> {{userInfo.email}}</span>
                 </span>
               </div>
               <div class="info">
@@ -87,13 +82,32 @@
                   <span>
                     <i class="iconfont icon-youxiang1"> </i>求职状态：
                   </span>
-                  <span> 在职（一月内到岗）</span>
+                  <span> {{userInfo.status}}</span>
                 </span>
               </div>
             </div>
           </div>
         </div>
-        <div ref="technology" class="technology">技术栈</div>
+        <div ref="technology" class="technology">
+          <h2>技术栈</h2>
+          <div class="tec_box">
+            <div class="info" v-for="(item,index) in tecList" :key="index">
+              <el-progress type="circle" :percentage="item.percent" :color="customColorMethod"></el-progress>
+              <span>{{item.name}}</span>
+            </div>
+          </div>
+          <div class="tec_dec">
+            <ul>
+              <li> <i class="iconfont icon-fenlei1"></i>熟练使用Vue全家桶。</li>
+              <li> <i class="iconfont icon-fenlei1"></i>熟练微信小程序开发，并且工作中有微信小程序，支付宝小程序，蜻蜓小程序demo开发经验。</li>
+              <li> <i class="iconfont icon-fenlei1"></i>有扎实的JavaScript基础,对于ES6，ES7有一定理解。</li>
+              <li> <i class="iconfont icon-fenlei1"></i>熟练使用git进行版本管理。</li>
+              <li> <i class="iconfont icon-fenlei1"></i>熟练使用uni-app进行开发。</li>
+              <li> <i class="iconfont icon-fenlei1"></i>熟练使用预处理器less，可使用less,scss快速书写css。</li>
+              <li> <i class="iconfont icon-fenlei1"></i>了解node.js，Nginx。有自己服务器搭建经历。</li>
+            </ul>
+          </div>
+        </div>
         <div ref="project" class="project">项目介绍</div>
         <div ref="work" class="work">工作经历</div>
       </div>
@@ -109,26 +123,38 @@ export default {
   data () {
     return {
       isTop: false,
+      userInfo: {},
       liData: [
         { name: '个人介绍', ref: 'person_intro' },
         { name: '技术栈', ref: 'technology' },
         { name: '项目介绍', ref: 'project' },
         { name: '工作经历', ref: 'work' }
       ],
-      navIndex: 0
+      navIndex: 0,
+      tecList: [
+        { name: 'HTML', percent: 65 },
+        { name: 'CSS', percent: 60 },
+        { name: 'JS', percent: 75 },
+        { name: 'VUE', percent: 80 }
+      ]
     }
   },
   mounted () {
+    this.getInfo()
     window.addEventListener('scroll', this.handerScoll, true)
   },
   methods: {
     handerScoll (e) {
       const top_img = this.$refs.top_img
       const scrollY = window.scrollY
-      const offsetHeight = top_img.offsetHeight
-      this.isTop = scrollY - offsetHeight >= 0 ? true : false
-      const scollBox = this.$refs.scoll_box
-      this.navIndex = Math.floor(scollBox.scrollTop / 700)
+      try {
+        const offsetHeight = top_img.offsetHeight
+        this.isTop = scrollY - offsetHeight >= 0 ? true : false
+        const scollBox = this.$refs.scoll_box
+        this.navIndex = Math.floor(scollBox.scrollTop / 700)
+      } catch (err) {
+        // console.log(err)
+      }
     },
     handerGo (index) {
       const ref = this.liData[index].ref
@@ -136,7 +162,29 @@ export default {
       this.navIndex = index
       const scollBox = this.$refs.scoll_box
       const top_img = this.$refs.top_img
-      scollBox.scrollTop = this.isTop ? domEle.offsetTop - top_img.offsetHeight : domEle.offsetTop - 80 - top_img.offsetHeight
+      scollBox.scrollTop = domEle.offsetTop - top_img.offsetHeight - 80
+    },
+    getInfo () {
+      let url = '/getUserInfo'
+      statisticalForHome(url, {}).then(res => {
+        if (res.code === 200) {
+          // console.log(res)
+          this.userInfo = res.data
+        } else {
+          this.$message.error('服务器繁忙')
+        }
+      })
+    },
+    customColorMethod (percentage) {
+      if (percentage < 65) {
+        return '#d6723e';
+      } else if (percentage < 70) {
+        return '#e6a23c';
+      } else if (percentage < 76) {
+        return '#5dd5c8';
+      } else {
+        return '#67c23a';
+      }
     }
   }
 }
@@ -199,6 +247,7 @@ export default {
   section {
     height: 100vh;
     // overflow-y: auto;
+    // padding-bottom: 80px;
     .top_nav {
       background-color: #2c3e50;
       width: 100%;
@@ -241,7 +290,11 @@ export default {
     }
     .scoll_box {
       height: calc(100vh - 80px);
+      // height: 100vh;
       overflow-y: auto;
+      // padding: 80px 0;
+      padding-bottom: 80px;
+      margin-bottom: 80px;
       .person_intro,
       .project,
       .technology,
@@ -297,10 +350,59 @@ export default {
         background-color: #00500f;
       }
       .technology {
-        background-color: #009400;
+        background-color: #ededed;
+        position: relative;
+        h2 {
+          color: #999;
+          font-size: 24px;
+          padding-top: 60px;
+          text-align: center;
+        }
+        .tec_box {
+          width: 1300px;
+          margin: 0 auto;
+          height: 45%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin-top: -40px;
+          .info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            span {
+              display: block;
+              text-align: center;
+              margin-top: 20px;
+              width: 100%;
+              color: #999;
+            }
+          }
+        }
+        .tec_dec {
+          width: 850px;
+          margin: 0 auto;
+          ul {
+            // text-align: center;
+            margin-left: 140px;
+            // width: 600px;
+
+            li {
+              line-height: 40px;
+              height: 40px;
+              i {
+                color: #548cee;
+                margin-right: 8px;
+              }
+            }
+          }
+        }
       }
       .work {
-        background-color: #080077;
+        background-color: #fff;
+        height: 900px;
       }
     }
   }
