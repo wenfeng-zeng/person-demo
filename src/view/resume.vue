@@ -108,7 +108,35 @@
             </ul>
           </div>
         </div>
-        <div ref="project" class="project">项目介绍</div>
+        <div ref="project" class="project">
+          <h2>项目介绍</h2>
+          <div class="project_box">
+            <div class="project_list" @click="handerToProject('account')">
+              <div class="project_list_bg">
+                <img src="../assets/bussine1.jpg" alt="" srcset="">
+              </div>
+              <div class="project_list_info">
+                <h3>共享经济综合服务平台</h3>
+              </div>
+            </div>
+            <div class="project_list" @click="handerToProject('payment')">
+              <div class="project_list_bg">
+                <img src="../assets/bussine2.jpg" alt="" srcset="">
+              </div>
+              <div class="project_list_info">
+                <h3>容易付</h3>
+              </div>
+            </div>
+            <div class="project_list" @click="handerToProject('demo')">
+              <div class="project_list_bg">
+                <img src="../assets/bussine3.jpg" alt="" srcset="">
+              </div>
+              <div class="project_list_info">
+                <h3>个人网站(小demo)</h3>
+              </div>
+            </div>
+          </div>
+        </div>
         <div ref="work" class="work">工作经历</div>
       </div>
     </section>
@@ -185,6 +213,9 @@ export default {
       } else {
         return '#67c23a';
       }
+    },
+    handerToProject (path) {
+      this.$router.push({ path: path })
     }
   }
 }
@@ -347,7 +378,69 @@ export default {
         }
       }
       .project {
-        background-color: #00500f;
+        // background-color: #00500f;
+        display: flex;
+        align-items: center;
+        position: relative;
+        h2 {
+          position: absolute;
+          color: #999;
+          font-size: 24px;
+          top: 50px;
+          left: 50%;
+          transform: translate(-50%);
+        }
+        .project_box {
+          display: flex;
+          width: 1300px;
+          margin: 0 auto;
+          justify-content: space-around;
+          align-items: center;
+          .project_list {
+            flex: 1;
+            position: relative;
+            cursor: pointer;
+            .project_list_bg {
+              width: 300px;
+              height: 200px;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .project_list_info {
+              background-color: rgba(0, 0, 0, 0.5);
+              width: 300px;
+              height: 200px;
+              display: none;
+              position: absolute;
+              top: 0;
+              left: 0;
+              h3 {
+                width: 100%;
+                text-align: center;
+                color: #fff;
+              }
+            }
+            &:hover {
+              overflow: hidden;
+              transform: scale(1.1, 1.1);
+              transition: all 0.3s linear;
+              .project_list_info {
+                // display: block;
+                display: flex;
+                align-items: center;
+              }
+              .project_list_bg {
+                // transform: scale(1.3, 1.3);
+                img {
+                  width: 100%;
+                  height: 100%;
+                }
+              }
+            }
+          }
+        }
       }
       .technology {
         background-color: #ededed;

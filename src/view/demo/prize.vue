@@ -18,7 +18,7 @@
         <el-table-column align="center" prop="id" label="抽奖号"> </el-table-column>
         <el-table-column align="center" prop="date" label="日期"> </el-table-column>
         <el-table-column align="center" prop="name" label="奖品"> </el-table-column>
-        <el-table-column align="center" prop="count" label="数量"> </el-table-column>
+        <!-- <el-table-column align="center" prop="count" label="数量"> </el-table-column> -->
       </el-table>
       <div class="pagination">
         <page :currentPage="currentPage" :pageSize="pageSize" :total="total" @sizeChange="handleSizeChange" @pageChange="handleCurrentChange"></page>
@@ -257,18 +257,18 @@ export default {
   .history {
     margin: 20px 20px 20px 20px;
     // border: 1px solid #ebeef5; /*no*/
+    /deep/.el-table {
+      width: 800px;
+      .el-table__header {
+        th {
+          background-color: #f4f9ff !important;
+        }
+      }
+    }
     @media screen and (max-width: 500px) {
       width: 100%;
       /deep/.el-table {
         width: 100%;
-      }
-    }
-    /deep/.el-table {
-      width: 800px;
-      .has-gutter {
-        th {
-          background-color: #f4f9ff !important;
-        }
       }
     }
     .pagination {

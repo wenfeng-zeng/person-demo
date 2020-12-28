@@ -29,24 +29,42 @@ export default new Router({
           component: () => import('@/view/resume.vue')
         },
         {
-          path: '/loading',
-          name: 'loading',
-          component: () => import('@/view/demo/index.vue')
-        },
-        {
-          path: '/fontDemo',
-          name: 'fontDemo',
-          component: () => import('@/view/demo/fontDemo.vue')
-        },
-        {
-          path: '/lightDemo',
-          name: 'lightDemo',
-          component: () => import('@/view/demo/lightDemo.vue')
-        },
-        {
-          path: '/snow',
-          name: 'snow',
-          component: () => import('@/view/demo/snow.vue')
+          path: '/demo',
+          name: 'demo',
+          component: () => import('@/view/project/demo.vue'),
+          redirect: '/demo/fontDemo',
+          children: [
+            {
+              path: '/demo/loading',
+              name: 'loading',
+              component: () => import('@/view/demo/index.vue')
+            },
+            {
+              path: '/demo/fontDemo',
+              name: 'fontDemo',
+              component: () => import('@/view/demo/fontDemo.vue')
+            },
+            {
+              path: '/demo/lightDemo',
+              name: 'lightDemo',
+              component: () => import('@/view/demo/lightDemo.vue')
+            },
+            {
+              path: '/demo/snow',
+              name: 'snow',
+              component: () => import('@/view/demo/snow.vue')
+            },
+            {
+              path: '/demo/web-view',
+              name: 'web-view',
+              component: () => import('@/view/demo/web-view.vue')
+            },
+            {
+              path: '/demo/prize',
+              name: 'prize',
+              component: () => import('@/view/demo/prize.vue')
+            },
+          ]
         },
         {
           path: '/test',
@@ -57,11 +75,6 @@ export default new Router({
           path: '/test1',
           name: 'test1',
           component: () => import('@/view/demo/test1.vue')
-        },
-        {
-          path: '/prize',
-          name: 'prize',
-          component: () => import('@/view/demo/prize.vue')
         },
         {
           path: '/account',
