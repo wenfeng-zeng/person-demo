@@ -16,15 +16,29 @@
 export default {
   data () {
     return {
-      appid: ''
+      appid: '',
+      num: 0
     }
   },
   created () {
-    console.log(wx)
+    // console.log(this.fb(2, 4))
   },
   methods: {
     navigateBack () {
       wx.miniProgram.navigateBack()
+    },
+    // m 初始值
+    // b 第几行
+    fb (m, b) {
+      if (b === 0) return 0
+      if (b === 1) {
+        return m
+      } else if (b === 2) {
+        return m + m
+      } else {
+        return this.fb(m, b - 1) + this.fb(m, b - 2)
+      }
+      // 4:  3 + 2 === 2 + 1 + 1 + 0===  4 + 2 + 2 
     }
   }
 }

@@ -3,7 +3,8 @@
     <div class="top_img" ref="top_img">
       <div class="bg"> </div>
       <div class="box">
-        <h1>曾文烽</h1>
+        <h1>Hello，</h1>
+        <h1>I`m 曾文烽</h1>
       </div>
     </div>
     <section class="main_resume" ref="viewBox">
@@ -250,14 +251,27 @@ export default {
       position: absolute;
       // background-color: #fff;
       opacity: 0.5;
-      width: 200px;
-      height: 200px;
+      width: 400px;
+      height: 250px;
       z-index: 9999;
-      top: 250px;
+      top: 170px;
       left: 50%;
-      transform: translate(-120px, 0);
+      transform: translate(-200px, 0);
+      // display: flex;
+      // align-items: center;
+      // justify-content: center;
+      box-shadow: 0 0 50px #111;
+      // flex-direction: column;
+      flex-wrap: wrap;
+      padding: 45px 0;
+      box-sizing: border-box;
       h1 {
         font-size: 40px;
+        font-weight: 700;
+        width: 100%;
+        text-align: center;
+        // font-family: ;
+        font-family: "Bad Script", cursive;
       }
     }
     @keyframes translate {
@@ -326,6 +340,8 @@ export default {
       // padding: 80px 0;
       padding-bottom: 80px;
       margin-bottom: 80px;
+      background: url("../assets/sc_bg.jpg") no-repeat;
+      background-size: cover;
       .person_intro,
       .project,
       .technology,
@@ -343,7 +359,7 @@ export default {
         height: 500px;
         justify-content: space-around;
         h2 {
-          color: #999;
+          color: #fff;
           font-size: 24px;
         }
         img {
@@ -367,6 +383,7 @@ export default {
               width: 40%;
               span {
                 text-align: left;
+                color: #fff;
                 i {
                   font-size: 20px;
                   margin-right: 6px;
@@ -384,7 +401,7 @@ export default {
         position: relative;
         h2 {
           position: absolute;
-          color: #999;
+          color: #fff;
           font-size: 24px;
           top: 50px;
           left: 50%;
@@ -443,10 +460,10 @@ export default {
         }
       }
       .technology {
-        background-color: #ededed;
+        // background-color: #ededed;
         position: relative;
         h2 {
-          color: #999;
+          color: #fff;
           font-size: 24px;
           padding-top: 60px;
           text-align: center;
@@ -470,7 +487,7 @@ export default {
               text-align: center;
               margin-top: 20px;
               width: 100%;
-              color: #999;
+              color: #fff;
             }
           }
         }
@@ -485,6 +502,7 @@ export default {
             li {
               line-height: 40px;
               height: 40px;
+              color: #fff;
               i {
                 color: #548cee;
                 margin-right: 8px;
@@ -494,7 +512,7 @@ export default {
         }
       }
       .work {
-        background-color: #fff;
+        // background-color: #fff;
         height: 900px;
       }
     }

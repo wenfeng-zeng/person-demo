@@ -64,6 +64,11 @@ export default new Router({
               name: 'prize',
               component: () => import('@/view/demo/prize.vue')
             },
+            {
+              path: '/demo/echarts',
+              name: 'echarts',
+              component: () => import('@/view/demo/echartsList.vue')
+            },
           ]
         },
         {
