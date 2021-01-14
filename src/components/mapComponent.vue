@@ -20,7 +20,7 @@ export default {
       loaded: false,
       plugin: [{
         enableHighAccuracy: true,//是否使用高精度定位，默认:true
-        timeout: 100,          //超过10秒后停止定位，默认：无穷大
+        timeout: 10000,          //超过10秒后停止定位，默认：无穷大
         maximumAge: 0,           //定位结果缓存0毫秒，默认：0
         convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
         showButton: true,        //显示定位按钮，默认：true
@@ -33,6 +33,16 @@ export default {
         pName: 'Geolocation',
         events: {
           init (o) {
+            o.getCityInfo((status, res) => {
+              console.log(res)
+              if (res) {
+                self.lng = res.center[0];
+                self.lat = res.center[1];
+                self.center = res.center;
+                self.loaded = true;
+                self.$nextTick();
+              }
+            })
             // o 是高德地图定位插件实例
             o.getCurrentPosition((status, result) => {
               console.log(result)
@@ -50,18 +60,7 @@ export default {
     }
   },
   created () {
-    // let geo = navigator.geolocation
-    // let pos = geo.getCurrentPosition()
-    // console.log(pos)
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
-      // 支持
-      console.log("支持地理位置接口");
-    } else {
-      // 不支持
-      console.log("不支持地理位置接口");
 
-    }
   }
 }
 </script>
