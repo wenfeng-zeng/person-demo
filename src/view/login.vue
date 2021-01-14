@@ -28,6 +28,9 @@
           </el-form>
         </div>
       </div>
+      <div class="varchar">
+        <span>粤ICP备19153616号-1</span>
+      </div>
     </div>
   </div>
   </div>
@@ -121,6 +124,13 @@ export default {
         color: #333;
         margin-bottom: 16px;
       }
+    }
+    .varchar {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #9e9e9e;
     }
   }
 }

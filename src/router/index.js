@@ -45,6 +45,11 @@ export default new Router({
               component: () => import('@/view/demo/fontDemo.vue')
             },
             {
+              path: '/demo/map',
+              name: 'map',
+              component: () => import('@/view/demo/map.vue')
+            },
+            {
               path: '/demo/lightDemo',
               name: 'lightDemo',
               component: () => import('@/view/demo/lightDemo.vue')

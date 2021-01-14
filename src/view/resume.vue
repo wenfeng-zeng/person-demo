@@ -4,7 +4,7 @@
       <div class="bg"> </div>
       <div class="box">
         <h1>Hello，</h1>
-        <h1>I`m 曾文烽</h1>
+        <h1>I`m {{userInfo.name}}</h1>
       </div>
     </div>
     <section class="main_resume" ref="viewBox">
@@ -128,12 +128,23 @@
                 <h3>容易付</h3>
               </div>
             </div>
-            <div class="project_list" @click="handerToProject('demo')">
+            <div class="project_list">
               <div class="project_list_bg">
                 <img src="../assets/bussine3.jpg" alt="" srcset="">
               </div>
               <div class="project_list_info">
-                <h3>个人网站(小demo)</h3>
+                <h3>个人网站(本网站)</h3>
+                <div class="project_list_info_dec">
+                  <p>基于vue、node、Nginx搭建</p>
+                </div>
+              </div>
+            </div>
+            <div class="project_list" @click="handerToProject('demo')">
+              <div class="project_list_bg">
+                <img src="../assets/demo_bg.jpg" alt="" srcset="">
+              </div>
+              <div class="project_list_info">
+                <h3>平常小demo</h3>
               </div>
             </div>
           </div>
@@ -411,10 +422,13 @@ export default {
           display: flex;
           width: 1300px;
           margin: 0 auto;
-          justify-content: space-around;
+          // justify-content: space-around;
           align-items: center;
+          flex-wrap: wrap;
           .project_list {
-            flex: 1;
+            // flex: 1;
+            margin-top: 50px;
+            width: 33%;
             position: relative;
             cursor: pointer;
             .project_list_bg {
@@ -445,8 +459,22 @@ export default {
               transition: all 0.3s linear;
               .project_list_info {
                 // display: block;
+                box-sizing: border-box;
+                padding: 40px 0;
                 display: flex;
                 align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                h3 {
+                  width: 100%;
+                }
+                .project_list_info_dec {
+                  p {
+                    color: #fff;
+                    // text-align: center;
+                    // display: inline-block;
+                  }
+                }
               }
               .project_list_bg {
                 // transform: scale(1.3, 1.3);
@@ -487,6 +515,9 @@ export default {
               text-align: center;
               margin-top: 20px;
               width: 100%;
+              color: #fff;
+            }
+            /deep/.el-progress__text {
               color: #fff;
             }
           }
