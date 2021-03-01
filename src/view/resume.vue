@@ -149,7 +149,46 @@
             </div>
           </div>
         </div>
-        <div ref="work" class="work">工作经历</div>
+        <div ref="work" class="work">
+          <h2>工作经历</h2>
+          <div class="work_step">
+            <el-steps direction="vertical" :active="1" :align-center="true">
+              <el-step title="2015年6月 - 2016年7月">
+                <template slot="description">
+                  <div class="work_step_detail">
+                    <h3>广东省电信工程有限公司</h3>
+                    <p>&lt; 网络工程师 &gt;</p>
+                    <p>● 负责中国电信广东省内故障监控。期间自学web</p>
+                  </div>
+                </template>
+              </el-step>
+              <el-step title="2016年8月 - 2019年7月">
+                <template slot="description">
+                  <div class="work_step_detail">
+                    <h3>广州市领宝网络科技有限公司</h3>
+                    <p>&lt; 前端开发工程师 &gt;</p>
+                    <p>
+                      ● 负责和后端研发同时协作开发， 确保代码有效对接，优化前端性能 
+                    </p>
+                    <p>● 负责pc端,移动端及小程序项目的前端开发 </p>
+
+                  </div>
+                </template>
+              </el-step>
+              <el-step title="2019年9月-2021年2月">
+                <template slot="description">
+                  <div class="work_step_detail">
+                    <h3>广州市莱麦互联网科技有限公司</h3>
+                    <p>&lt; 前端开发工程师 &gt;</p>
+                    <p>● 负责公司各个项目的前端开发工作 </p>
+                    <p>● 负责开发各种demo，帮助后端/安卓同事跑通相关流程 </p>
+                  </div>
+                </template>
+              </el-step>
+            </el-steps>
+
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -160,7 +199,7 @@
 // import { login } from '../request/login_api'
 import { statisticalForHome, getRequest } from '@/request/home'
 export default {
-  data () {
+  data() {
     return {
       isTop: false,
       userInfo: {},
@@ -179,12 +218,12 @@ export default {
       ]
     }
   },
-  mounted () {
+  mounted() {
     this.getInfo()
     window.addEventListener('scroll', this.handerScoll, true)
   },
   methods: {
-    handerScoll (e) {
+    handerScoll(e) {
       const top_img = this.$refs.top_img
       const scrollY = window.scrollY
       try {
@@ -196,7 +235,7 @@ export default {
         // console.log(err)
       }
     },
-    handerGo (index) {
+    handerGo(index) {
       const ref = this.liData[index].ref
       const domEle = this.$refs[ref]
       this.navIndex = index
@@ -204,7 +243,7 @@ export default {
       const top_img = this.$refs.top_img
       scollBox.scrollTop = domEle.offsetTop - top_img.offsetHeight - 80
     },
-    getInfo () {
+    getInfo() {
       let url = '/getUserInfo'
       statisticalForHome(url, {}).then(res => {
         if (res.code === 200) {
@@ -215,7 +254,7 @@ export default {
         }
       })
     },
-    customColorMethod (percentage) {
+    customColorMethod(percentage) {
       if (percentage < 65) {
         return '#d6723e';
       } else if (percentage < 70) {
@@ -226,7 +265,7 @@ export default {
         return '#67c23a';
       }
     },
-    handerToProject (path) {
+    handerToProject(path) {
       this.$router.push({ path: path })
     }
   }
@@ -545,6 +584,26 @@ export default {
       .work {
         // background-color: #fff;
         height: 900px;
+        h2 {
+          color: #fff;
+          font-size: 24px;
+          padding-top: 60px;
+          text-align: center;
+        }
+        .work_step {
+          width: 850px;
+          margin: 100px auto;
+          /deep/ .is-finish,
+          /deep/ .is-process,
+          /deep/ .is-wait {
+            font-size: 16px;
+            color: #fff;
+            border-color: #fff;
+          }
+          .work_step_detail {
+            margin-bottom: 50px;
+          }
+        }
       }
     }
   }
