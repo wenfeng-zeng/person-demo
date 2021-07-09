@@ -7,7 +7,7 @@
           <el-button @click="initScaleTools" type="primary">添加比例尺及缩放工具栏</el-button>
           <!-- <el-button @click="getLine" type="primary">获取交通路线</el-button> -->
           <el-input label="关键字搜索" placeholder="请输入搜索关键字" v-model="keyWord">
-            <el-button slot="append" icon="el-icon-search" @click="searchNearBy(1,5,keyWord)"></el-button>
+            <el-button slot="append" icon="el-icon-search" @click="searchByKeyword(1,5)"></el-button>
           </el-input>
         </div>
       </el-col>
@@ -39,7 +39,7 @@
 
 <script>
 // import Amap from '@/components/mapComponent'
-import { getCurrentPosition, addMarker, initScaleTools, transfer, walking, clearLine, showInfoWindow, searchNearBy, getAddressByLngLat } from "@/utils/map.js"
+import { getCurrentPosition, addMarker, initScaleTools, transfer, walking, clearLine, searchByKeyword, searchNearBy, getAddressByLngLat } from "@/utils/map.js"
 export default {
   // components: {
   //   Amap
@@ -81,20 +81,30 @@ export default {
     searchNearBy(pageNum, pageSize, keyWord, center) {
       if (!this.showNearBy) this.showNearBy = !this.showNearBy
       searchNearBy(this.map, center ? center : this.center, (status, result) => {
+        console.log(result);
         if (result.info === 'OK') {
           this.total = result.poiList.count
           this.tableData = result.poiList.pois
         }
       }, { city: this.addressComponent.city, pageIndex: pageNum, pageSize }, keyWord, 50000)
     },
+    searchByKeyword(pageNum, pageSize) {
+      if (!this.showNearBy) this.showNearBy = !this.showNearBy
+      searchByKeyword(this.map, (status, result) => {
+        if (result.info === 'OK') {
+          this.total = result.poiList.count
+          this.tableData = result.poiList.pois
+        }
+      }, { city: this.addressComponent.city, pageIndex: pageNum, pageSize }, this.keyWord)
+    },
     handleSizeChange(val) {
       this.pageNum = 1
       this.pageSize = val
-      this.searchNearBy(this.pageNum, this.pageSize)
+      this.searchByKeyword(this.pageNum, this.pageSize)
     },
     handleCurrentChange(val) {
       this.pageNum = val
-      this.searchNearBy(this.pageNum, this.pageSize)
+      this.searchByKeyword(this.pageNum, this.pageSize)
     },
     callback(status, result, lineStrory) {
       this.lineStrory = lineStrory

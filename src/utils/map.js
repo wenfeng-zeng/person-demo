@@ -121,6 +121,16 @@ export const searchNearBy = (map, center, callback, otherProps, keyword, radius)
     placeSearch.searchNearBy(keyword || '', center, radius || 1000, callback)
   })
 }
+
+export const searchByKeyword = (map, callback, otherProps, keyword) => {
+  AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function() {
+    var placeSearch = new AMap.PlaceSearch({
+      map: map,
+      ...otherProps
+    })
+    placeSearch.search(keyword, callback)
+  })
+}
 /**
  * 
  * @param {*} map 地图实例
