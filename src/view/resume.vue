@@ -106,6 +106,7 @@
               <li> <i class="iconfont icon-fenlei1"></i>熟练使用uni-app进行开发。</li>
               <li> <i class="iconfont icon-fenlei1"></i>熟练使用预处理器less，可使用less,scss快速书写css。</li>
               <li> <i class="iconfont icon-fenlei1"></i>了解node.js，Nginx。有自己服务器搭建经历。</li>
+              <li> <i class="iconfont icon-fenlei1"></i>了解react开发，了解react hooks等api的使用。</li>
             </ul>
           </div>
         </div>
@@ -182,6 +183,16 @@
                     <p>&lt; 前端开发工程师 &gt;</p>
                     <p>● 负责公司各个项目的前端开发工作 </p>
                     <p>● 负责开发各种demo，帮助后端/安卓同事跑通相关流程 </p>
+                  </div>
+                </template>
+              </el-step>
+              <el-step title="2021年3月-至今">
+                <template slot="description">
+                  <div class="work_step_detail">
+                    <h3>合生活集团</h3>
+                    <p>&lt; 前端开发工程师 &gt;</p>
+                    <p>● 负责公司各个项目的前端开发工作 </p>
+                    <p>● 其他开发工作 </p>
                   </div>
                 </template>
               </el-step>

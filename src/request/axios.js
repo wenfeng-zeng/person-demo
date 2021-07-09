@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 // var urlData
 // let needRequestCount = 0
-axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(function(config) {
   let token = store.state.token
   // let urlList = ['account-admin-web/login', 'account-admin-web/updateUserPassWord', 'account-admin-web/checkVerificationCode', 'account-admin-web/sendSmsCode ', 'account-admin-web/checkUser']
   // let isLogin = true
@@ -24,13 +24,13 @@ axios.interceptors.request.use(function (config) {
   }
   // needRequestCount++
   return config
-}, function (error) {
+}, function(error) {
   // 对请求错误做些什么
   console.log(error)
   return Promise.reject(error)
 })
 
-axios.interceptors.response.use(function (response) {
+axios.interceptors.response.use(function(response) {
   if (response.data.code === 403) {
     MessageBox.confirm('登录过期，请重新登录!', '登录超时', {
       confirmButtonText: '确定',
@@ -62,7 +62,7 @@ axios.interceptors.response.use(function (response) {
   //   })
   // }
   return response
-}, function (error) {
+}, function(error) {
   // needRequestCount--
   // if (needRequestCount === 0) {
   //   if (error.response && error.response.status === 403) {
@@ -83,7 +83,7 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error)
 })
 export default {
-  getRequest (url, data) {
+  getRequest(url, data) {
     return new Promise((resolve, reject) => {
       axios({
         method: 'get',
@@ -96,7 +96,7 @@ export default {
       })
     })
   },
-  getRequest1 (url, data) {
+  getRequest1(url, data) {
     return new Promise((resolve, reject) => {
       axios({
         method: 'get',
@@ -109,7 +109,7 @@ export default {
       })
     })
   },
-  postRequest (url, data) {
+  postRequest(url, data) {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
@@ -123,7 +123,7 @@ export default {
       })
     })
   },
-  postRequest1 (url, data) {
+  postRequest1(url, data) {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',
@@ -137,7 +137,7 @@ export default {
       })
     })
   },
-  postImg (url, data, config) {
+  postImg(url, data, config) {
     var data1 = qs.stringify(data) || {}
     return new Promise((resolve, reject) => {
       axios.post(urls + url, data1, config).then((res) => {
@@ -148,7 +148,7 @@ export default {
       })
     })
   },
-  downloadGetReqeust (url, params) {
+  downloadGetReqeust(url, params) {
     // var data = qs.stringify(data1) || {}
     // var data = data || {}
     return new Promise((resolve, reject) => {
@@ -167,7 +167,7 @@ export default {
       })
     })
   },
-  exportGetReqeust (url, params) {
+  exportGetReqeust(url, params) {
     // var data = qs.stringify(data1) || {}
     // var data = data || {}
     return new Promise((resolve, reject) => {
@@ -187,7 +187,7 @@ export default {
       })
     })
   },
-  fileImportRequest (url, data) {
+  fileImportRequest(url, data) {
     // var data = qs.stringify(data1) || {}
     return new Promise((resolve, reject) => {
       axios({
@@ -203,7 +203,7 @@ export default {
       })
     })
   },
-  downloadFormReqeust (url, data1) {
+  downloadFormReqeust(url, data1) {
     let data = qs.stringify(data1)
     return new Promise((resolve, reject) => {
       axios({
@@ -219,7 +219,7 @@ export default {
       })
     })
   },
-  postFromDataRequest (url, data1) {
+  postFromDataRequest(url, data1) {
     var data = qs.stringify(data1)
     return new Promise((resolve, reject) => {
       axios({
@@ -237,7 +237,7 @@ export default {
       })
     })
   },
-  multiPostFromDataRequest (url, data) {
+  multiPostFromDataRequest(url, data) {
     return new Promise((resolve, reject) => {
       axios({
         method: 'post',

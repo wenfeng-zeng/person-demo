@@ -1,18 +1,16 @@
 <template>
   <div class="home">
-    <template v-if="!_isMobile">
+    <!-- <template v-if="!_isMobile"> -->
+    <template>
       <el-container>
-        <!-- <div class="aside">
-          <Aside></Aside>
-        </div> -->
         <el-main style="padding:0;">
           <router-view></router-view>
         </el-main>
       </el-container>
     </template>
-    <template v-else>
+    <!-- <template v-else>
       <router-view></router-view>
-    </template>
+    </template> -->
   </div>
 </template>
 
@@ -25,18 +23,18 @@ export default {
     Header,
     Aside
   },
-  data () {
+  data() {
     return {
       meneList: [],
       _isMobile: null
     }
   },
-  created () {
-    console.log(this.$utils._isMobile())
-    this._isMobile = this.$utils._isMobile()
-    if (this._isMobile) this.$router.push({
-      path: '/phoneHome'
-    })
+  created() {
+    // console.log(this.$utils._isMobile())
+    // this._isMobile = this.$utils._isMobile()
+    // if (this._isMobile) this.$router.push({
+    //   path: '/phoneHome'
+    // })
   },
 }
 </script>

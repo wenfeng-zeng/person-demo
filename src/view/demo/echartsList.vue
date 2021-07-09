@@ -19,7 +19,7 @@ export default {
   components: {
     Echarts
   },
-  data () {
+  data() {
     return {
       charts: [
         {
@@ -28,7 +28,10 @@ export default {
             title: {
               // text: '三网成交额统计',
               subtext: '三网成交额统计',
-              left: 'center'
+              left: 'center',
+              textStyle: {
+                color: '#ffffff'
+              },
             },
             tooltip: {
               trigger: 'item',
@@ -233,11 +236,11 @@ export default {
       ]
     }
   },
-  created () {
+  created() {
     this.getInfo()
   },
   methods: {
-    getInfo () {
+    getInfo() {
       let url = '/getEchartsInfo'
       let data = {}
       let charts = this.charts

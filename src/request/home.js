@@ -9,6 +9,9 @@ export const userMenuList = (url, data) => {
 export const getRequest = (url, data) => {
   return axios.getRequest(url, data)
 }
+export const getFullScreenInfo = (url, data) => {
+  return axios.postFromDataRequest(url, data)
+}
 // export const getRequest1 = (url, data) => {
 //   return axios.getRequest1(url, data)
 // }

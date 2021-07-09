@@ -4,6 +4,8 @@
   </div>
 </template>
 <script>
+import * as echarts from "echarts";
+// Vue.prototype.$echarts = echarts;
 export default {
   props: {
     chartData: {
@@ -24,26 +26,28 @@ export default {
   watch: {
     //观察option的变化
     chartData: {
-      handler (newVal, oldVal) {
+      handler(newVal, oldVal) {
         console.log(newVal, oldVal)
-        var myChart = this.$echarts.init(document.getElementById(this.id));
+        // var myChart = this.$echarts.init(document.getElementById(this.id));
+        var myChart = echarts.init(document.getElementById(this.id));
         myChart.setOption(newVal);
       },
       deep: true
     }
   },
-  data () {
+  data() {
     // var myChart = this.$echarts.init(document.getElementById(this.id));
     return {
 
     };
   },
-  mounted () {
+  mounted() {
     this.draw(); //执行下面的函数
   },
   methods: {
-    draw () {
-      var myChart = this.$echarts.init(document.getElementById(this.id));
+    draw() {
+      // var myChart = this.$echarts.init(document.getElementById(this.id));
+      var myChart = echarts.init(document.getElementById(this.id));
       myChart.setOption(this.chartData);
     }
   },

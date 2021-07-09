@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "analyze": "npm run build --report"
   },
   "dependencies": {
     "axios": "^0.21.0",
@@ -18,6 +19,7 @@
     "less-loader": "^5.0.0",
     "lib-flexible": "^0.3.2",
     "particles.js": "^2.0.0",
+    "save-dev": "0.0.1-security",
     "vant": "^2.11.2",
     "vconsole": "^3.3.4",
     "vue": "^2.5.2",
@@ -63,7 +65,7 @@
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
-    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },

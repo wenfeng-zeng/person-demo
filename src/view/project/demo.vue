@@ -6,6 +6,7 @@
       <el-tab-pane label="鼠标聚光灯" name="lightDemo"></el-tab-pane>
       <el-tab-pane label="echarts" name="echarts"></el-tab-pane>
       <el-tab-pane label="地图" name="map"></el-tab-pane>
+      <el-tab-pane label="fullScreenDemo" name="fullScreenDemo"></el-tab-pane>
       <!-- <el-tab-pane label="web-view" name="web-view"></el-tab-pane> -->
     </el-tabs>
     <router-view />
@@ -14,13 +15,13 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       activeName: 0
     }
   },
   methods: {
-    handleClick (el) {
+    handleClick(el) {
       console.log(el.index, el)
       this.$router.push({ path: '/demo/' + el.name })
     }
