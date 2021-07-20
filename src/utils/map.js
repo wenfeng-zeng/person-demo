@@ -1,16 +1,35 @@
+import initMap from './initMap.js'
+
+export const init = (container, props) => {
+  const config = {
+    key: '0bea50b4d93ba7cbb1325e705f2010da'
+    // key: ''
+  }
+  // const AMap = await initMap(config)
+  // if (AMap !== String) return new AMap.Map(container)
+  // return AMap
+  return new Promise((resolve, reject) => {
+    initMap(config).then(AMap => {
+      //   zoom: 15
+      resolve(new AMap.Map(container, { ...props }))
+    }).catch(err => {
+      reject(err)
+    })
+  })
+}
 
 /**
  * 
  * @method {*} getCurrentPosition 定位
  * @param {*} map 地图实例
- * @param {*} success 定位成功的回调
- * @param {*} fail 定位失败的回调
- * @param {*} otherProps 其他参数，如有需要的话 具体api见https://lbs.amap.com/api/javascript-api/reference/location#m_AMap.Geolocation
+ * @param {Function} success 定位成功的回调
+ * @param {Function} fail 定位失败的回调
+ * @param {Object} otherProps 其他参数，如有需要的话 具体api见https://lbs.amap.com/api/javascript-api/reference/location#m_AMap.Geolocation
  */
 export const getCurrentPosition = (map, success, fail, otherProps) => {
   AMap.plugin('AMap.Geolocation', function() {
     var geolocation = new AMap.Geolocation({
-      enableHighAccuracy: true,//是否使用高精度定位，默认:true
+      enableHighAccuracy: false,//是否使用高精度定位，默认:true
       timeout: 10000,          //超过10秒后停止定位，默认：无穷大
       maximumAge: 0,           //定位结果缓存0毫秒，默认：0
       convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
@@ -20,9 +39,10 @@ export const getCurrentPosition = (map, success, fail, otherProps) => {
       showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
       showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
       panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
-      zoomToAccuracy: true,     //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+      zoomToAccuracy: false,     //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
       ...otherProps
     })
+    console.log(otherProps);
     map.addControl(geolocation);
     geolocation.getCurrentPosition()
     AMap.event.addListener(geolocation, 'complete', onComplete)
@@ -41,9 +61,10 @@ export const getCurrentPosition = (map, success, fail, otherProps) => {
 /**
  * @method {*} addMarker 添加点标记
  * @param {*} map 地图实例
- * @param {*} marker 需要定位的点经纬度集合，结构如 [{ lng: 116.39, lat: 39.9 ，otherProps:{title:'广州'}}]
- * @param {*} callback 点标记点击事件回调
- * @param {*} otherProps 定位其他属性，止于marker对象数组里面 具体api见https://lbs.amap.com/api/javascript-api/reference/overlay#marker
+ * @param {Array} marker 需要定位的点经纬度集合，结构如 [{ lng: 116.39, lat: 39.9 ，otherProps:{title:'广州'}}]
+ * @param {Function} callback 点标记点击事件回调
+ * @param {Object} otherProps 定位其他属性，止于marker对象数组里面 具体api见https://lbs.amap.com/api/javascript-api/reference/overlay#marker
+ * @returns 点标记集合markers
  */
 export const addMarker = (map, marker, callback) => {
   var markers = marker.map(e => {
@@ -51,29 +72,24 @@ export const addMarker = (map, marker, callback) => {
       position: [e.lng, e.lat],   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
       ...e.otherProps
     });
-    mark.on('click', callback);
+    if (callback) mark.on('click', callback);
     return mark
   })
   map.add(markers);
+  return markers
 }
 /**
  * @method {*} addMarker 移除点标记
  * @param {*} map 地图实例
- * @param {*} marker 需要定位的点经纬度集合，结构如 [{ lng: 116.39, lat: 39.9 ，otherProps:{title:'广州'}}]
- * @param {*} otherProps 定位其他属性，止于marker对象数组里面 具体api见https://lbs.amap.com/api/javascript-api/reference/overlay#marker
+ * @param {Array} marker 由addMarker返回的点标记集合
  */
 export const removeMarker = (map, marker) => {
-  var markers = marker.map(e => {
-    return new AMap.Marker({
-      position: [e.lng, e.lat],   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-    });
-  })
-  map.remove(markers);
+  map.remove(marker);
 }
 /**
  * @param {*} map 地图实例
- * @param {*} noScale 不需要比例尺  true表示不需要
- * @param {*} noToolBar 不需要工具栏 true表示不需要
+ * @param {Boolean} noScale 不需要比例尺  true表示不需要
+ * @param {Boolean} noToolBar 不需要工具栏 true表示不需要
  */
 export const initScaleTools = (map, noScale, noToolBar) => {
   if (!noScale) {
@@ -93,8 +109,8 @@ export const initScaleTools = (map, noScale, noToolBar) => {
 /**
  * 信息窗体
  * @param {*} map 地图实例
- * @param {*} center 经纬度
- * @param {*} content 信息窗体内容
+ * @param {Array} center 经纬度
+ * @param {String} content 信息窗体内容
  */
 export const showInfoWindow = (map, center, content) => {
   var infoWindow = new AMap.InfoWindow({
@@ -105,15 +121,16 @@ export const showInfoWindow = (map, center, content) => {
 /**
  * 
  * @param {*} map 地图实例
- * @param {*} center 经纬度
- * @param {*} radius 取值范围：0-50000 范围
- * @param {*} otherProps  city 页码等其他参数
- * @param {*} callback 回调
- * @param {*} keyword 搜索关键字
+ * @param {Array} center 经纬度
+ * @param {Number} radius 取值范围：0-50000 范围
+ * @param {Object} otherProps  city 页码等其他参数
+ * @param {Function} callback 回调
+ * @param {String} keyword 搜索关键字
  * https://lbs.amap.com/api/javascript-api/reference/search#m_AMap.PlaceSearch
  */
 export const searchNearBy = (map, center, callback, otherProps, keyword, radius) => {
-  AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function() {
+  map.clearMap()
+  AMap.plugin(['AMap.PlaceSearch'], function() {
     var placeSearch = new AMap.PlaceSearch({
       map: map,
       ...otherProps
@@ -122,11 +139,20 @@ export const searchNearBy = (map, center, callback, otherProps, keyword, radius)
   })
 }
 
+/**
+ * method
+ * @param {*} map 地图实例
+ * @param {Function} callback 回调函数
+ * @param {Object} otherProps 其他属性
+ * @param {String} keyword 关键字
+ * @author 曾文烽 2021-07-09 289515197@qq.com
+ */
 export const searchByKeyword = (map, callback, otherProps, keyword) => {
-  AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch'], function() {
+  map.clearMap()
+  AMap.plugin(['AMap.PlaceSearch'], function() {
     var placeSearch = new AMap.PlaceSearch({
       map: map,
-      ...otherProps
+      ...otherProps,
     })
     placeSearch.search(keyword, callback)
   })
@@ -134,15 +160,15 @@ export const searchByKeyword = (map, callback, otherProps, keyword) => {
 /**
  * 
  * @param {*} map 地图实例
- * @param {*} startLngLat  起点经纬度
- * @param {*} endLngLat 终点经纬度
- * @param {*} city 城市名 默认广州
- * @param {*} callback 回调函数
- * @param {*} panel 容器id
- * @param {*} isLngLat 是否经纬度查询，如传false 则为名称查询
- * @param {*} startName 起点名称 
- * @param {*} endName 终点名称 
- * @param {*} endName otherProps 构造函数其他参数，详见https://lbs.amap.com/api/javascript-api/reference/route-search#m_TransferResult
+ * @param {Number} startLngLat  起点经纬度
+ * @param {Number} endLngLat 终点经纬度
+ * @param {String} city 城市名 默认广州
+ * @param {Function} callback 回调函数
+ * @param {String} panel 容器id
+ * @param {Boolean} isLngLat 是否经纬度查询，如传false 则为名称查询
+ * @param {String} startName 起点名称 
+ * @param {String} endName 终点名称 
+ * @param {Object}  otherProps 构造函数其他参数，详见https://lbs.amap.com/api/javascript-api/reference/route-search#m_TransferResult
  */
 export const transfer = (map, startLngLat, endLngLat, city, callback, panel, isLngLat = true, startName, endName, otherProps) => {
   AMap.plugin('AMap.Transfer', function() {
@@ -165,7 +191,19 @@ export const transfer = (map, startLngLat, endLngLat, city, callback, panel, isL
     }
   })
 }
-
+/**
+ * 
+ * @param {*} map 地图实例
+ * @param {Number} startLngLat 起点经纬度
+ * @param {Number} endLngLat 终点经纬度
+ * @param {String} city 城市
+ * @param {Function} callback 回调函数
+ * @param {String} panel 容器id
+ * @param {Number} isLngLat 是否经纬度查询 默认是
+ * @param {String} startName 当isLngLat传false时，为起点名称
+ * @param {String} endName 当isLngLat传false时，为终点名称
+ * @param {Object} otherProps 其他属性
+ */
 export const walking = (map, startLngLat, endLngLat, city, callback, panel, isLngLat = true, startName, endName, otherProps) => {
   AMap.plugin('AMap.Walking', function() {
     var transOptions = {
@@ -186,10 +224,21 @@ export const walking = (map, startLngLat, endLngLat, city, callback, panel, isLn
     }
   })
 }
-
+// 清除线路图
+/**
+ * 
+ * @param {*} lineStrory AMap.Walking/transfer 创建的实例对象
+ */
 export const clearLine = (lineStrory) => {
   lineStrory.clear()
 }
+// 经纬度获取地址
+/**
+ * 
+ * @param {String} LngLat 经纬度
+ * @param {Function} callback 回调函数
+ * @param {Object} otherProps 其他参数
+ */
 export const getAddressByLngLat = (LngLat, callback, otherProps) => {
   AMap.plugin('AMap.Geocoder', function() {
     var geocoder = new AMap.Geocoder({
@@ -201,3 +250,18 @@ export const getAddressByLngLat = (LngLat, callback, otherProps) => {
     })
   })
 }
+const mapJS = {
+  init,
+  getCurrentPosition,
+  addMarker,
+  addMarker,
+  initScaleTools,
+  showInfoWindow,
+  searchNearBy,
+  searchByKeyword,
+  transfer,
+  walking,
+  clearLine,
+  getAddressByLngLat
+}
+export default mapJS

@@ -13,6 +13,11 @@ export default new Router({
       redirect: '/login',
     },
     {
+      path: '/test2',
+      name: 'test2',
+      component: () => import('@/view/demo/test2.vue')
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('@/view/login.vue'),
@@ -51,8 +56,13 @@ export default new Router({
             },
             {
               path: '/demo/fullScreenDemo',
-              name: 'fullScreenDemo',
+              name: 'fullScreenDemo1',
               component: () => import('@/view/demo/fullScreenDemo.vue')
+            },
+            {
+              path: '/demo/arcgis',
+              name: 'arcgis',
+              component: () => import('@/view/demo/arcgis.vue')
             },
             {
               path: '/demo/lightDemo',
@@ -85,6 +95,16 @@ export default new Router({
           path: '/test',
           name: 'test',
           component: () => import('@/view/demo/test.vue')
+        },
+        {
+          path: '/fullScreenDemo',
+          name: 'fullScreenDemo',
+          component: () => import('@/view/fullScreenDemo/fullScreenDemo2.vue'),
+        },
+        {
+          path: '/fullScreenDemo/economy',
+          name: 'economy',
+          component: () => import('@/view/fullScreenDemo/child/economy.vue'),
         },
         {
           path: '/test1',

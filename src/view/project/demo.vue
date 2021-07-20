@@ -7,6 +7,7 @@
       <el-tab-pane label="echarts" name="echarts"></el-tab-pane>
       <el-tab-pane label="地图" name="map"></el-tab-pane>
       <el-tab-pane label="fullScreenDemo" name="fullScreenDemo"></el-tab-pane>
+      <el-tab-pane label="arcgis" name="arcgis"></el-tab-pane>
       <!-- <el-tab-pane label="web-view" name="web-view"></el-tab-pane> -->
     </el-tabs>
     <router-view />

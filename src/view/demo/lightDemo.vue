@@ -7,16 +7,16 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       doc: null
     }
   },
-  created () {
+  created() {
     this.doc = document.documentElement
   },
   methods: {
-    handerMove (e) {
+    handerMove(e) {
       // const doc = document.documentElement
       this.doc.style.setProperty('--x', e.clientX + 'px')
       this.doc.style.setProperty('--y', e.clientY + 'px')

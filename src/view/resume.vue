@@ -148,6 +148,14 @@
                 <h3>平常小demo</h3>
               </div>
             </div>
+            <div class="project_list" @click="handerToProject('fullScreenDemo')">
+              <div class="project_list_bg">
+                <img src="../assets/demo_bg.jpg" alt="" srcset="">
+              </div>
+              <div class="project_list_info">
+                <h3>大屏demo</h3>
+              </div>
+            </div>
           </div>
         </div>
         <div ref="work" class="work">
