@@ -33,6 +33,14 @@ module.exports = {
           '^/files': ''
         }
       },
+      '/socketIO': {
+        target: 'http://127.0.0.1:8899',
+        changeOrigin: true,
+        ws: false,
+        pathRewrite: {
+          '^/socketIO': ''
+        }
+      },
     },
 
     // Various Dev Server settings

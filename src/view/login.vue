@@ -40,7 +40,7 @@
 // import { login } from '../request/login_api'
 import { statisticalForHome, getRequest } from '@/request/home'
 export default {
-  data () {
+  data() {
     return {
       ruleForm2: {
         userName: '',
@@ -57,14 +57,14 @@ export default {
       },
     }
   },
-  mounted () {
+  mounted() {
     let urls = process.env.NODE_ENV === 'development' ? 'node/getParticlesJson' : './static/particles.json'
-    particlesJS.load('particles', urls, function () {
+    particlesJS.load('particles', urls, function() {
       console.log('callback - particles-js config loaded');
     });
   },
   methods: {
-    handleSubmit () {
+    handleSubmit() {
       this.$refs.ruleForm2.validate(v => {
         if (!v) {
           this.$message.error('请输入正确的账户密码')

@@ -5,6 +5,7 @@
       <Echarts :id="'myChart1'" :chartData="charts[1].options"></Echarts>
       <Echarts :id="'myChart2'" :chartData="charts[2].options"></Echarts>
     </div>
+    <Echarts :id="'barCharts'" :chartData="barCharts"></Echarts>
     <div class="area">
       <Echarts :id="'myChart3'" :width="'100%'" :chartData="charts[3].options"></Echarts>
     </div>
@@ -13,6 +14,7 @@
 
 <script>
 import Echarts from '@/components/echarts.vue'
+import * as echarts from "echarts";
 // import { getEchartsInfo } from "@/request/api";
 import { statisticalForHome, getRequest } from '@/request/home'
 export default {
@@ -233,7 +235,152 @@ export default {
 
           }
         }
-      ]
+      ],
+      barCharts: {
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+            type: 'line'        // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+        backgroundColor: '#000c2b',
+        legend: {
+          data: [
+            {
+              name: '邮件营销',
+              itemStyle: {
+                color: '#4f83bb',
+                // decal: 'none'
+                decal: {
+                  symbol: 'none',
+                  symbolSize: 0
+                }
+              },
+              textStyle: {
+                color: '#fff',
+              }
+            },
+            {
+              name: '联盟广告',
+              itemStyle: {
+                color: '#85b1de',
+                decal: {
+                  symbol: 'none'
+                }
+              },
+              textStyle: {
+                color: '#fff',
+              }
+            },
+            {
+              name: '视频广告',
+              itemStyle: {
+                color: '#ffd32b',
+                // decal: 'none'
+                decal: {
+                  symbol: 'none'
+                }
+              },
+              textStyle: {
+                color: '#fff',
+              }
+            },
+          ]
+        },
+        // grid: {
+        //   left: '3%',
+        //   right: '4%',
+        //   bottom: '3%',
+        //   containLabel: true
+        // },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '邮件营销',
+            type: 'bar',
+            stack: '广告',
+            barCategoryGap: '40px',
+            barWidth: 30,
+            barGap: '200px',
+            itemStyle: {
+              // color: new echarts.graphic.LinearGradient(
+              //   0, 0, 0, 1,
+              //   [
+              //     { offset: 0, color: '#fff' },
+              //     { offset: 0.1, color: '#fff' },
+              //     { offset: 1, color: '#fff' }
+              //   ]
+              // ),
+              decal: {
+                symbol: ['image://https://cdn.lastmiles.cn/apps/6825704998107635712.png'],
+                symbolSize: 1,
+                symbolKeepAspect: false,
+                dashArrayX: 10000,
+                backgroundColor: '#000c2b'
+              }
+            },
+            data: [120, 132, 101, 134, 90, 230, 210]
+          },
+          {
+            name: '联盟广告',
+            type: 'bar',
+            stack: '广告',
+            barCategoryGap: '40px',
+            barWidth: 30,
+            itemStyle: {
+              // color: new echarts.graphic.LinearGradient(
+              //   0, 0, 0, 1,
+              //   [
+              //     { offset: 0, color: '#fff' },
+              //     { offset: 1, color: '#fff' }
+              //   ]
+              // ),
+              decal: {
+                symbol: ['image://https://cdn.lastmiles.cn/apps/6825699766015385600.png'],
+                symbolSize: 1,
+                symbolKeepAspect: false,
+                dashArrayX: 10000,
+                backgroundColor: '#000c2b'
+              }
+            },
+            data: [220, 182, 191, 234, 290, 330, 310]
+          },
+          {
+            name: '视频广告',
+            type: 'bar',
+            stack: '广告',
+            barCategoryGap: '40px',
+            barWidth: 30,
+            itemStyle: {
+              // color: new echarts.graphic.LinearGradient(
+              //   0, 0, 0, 1,
+              //   [
+              //     { offset: 0, color: '#fff' },
+              //     { offset: 1, color: '#fff' }
+              //   ]
+              // ),
+              decal: {
+                symbol: ['image://https://cdn.lastmiles.cn/apps/6825703896595324928.png'],
+                symbolSize: 1,
+                symbolKeepAspect: false,
+                dashArrayX: 10000,
+                backgroundColor: '#000c2b'
+              }
+            },
+            data: [150, 232, 201, 154, 190, 330, 410]
+          }
+        ]
+      }
     }
   },
   created() {

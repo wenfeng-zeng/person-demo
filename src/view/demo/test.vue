@@ -8,30 +8,31 @@
 </template>
 
 <script>
-import { statisticalForHome, getRequest } from '@/request/home'
+import { statisticalForHome, getRequest, multiPostFromDataRequest } from '@/request/home'
 export default {
-  data () {
+  data() {
     return {
       get: 'get',
       post: 'post'
     }
   },
   methods: {
-    getRequest () {
-      getRequest('/getIndex', {}).then(res => {
+    getRequest() {
+      getRequest('/getIndex', { id: 1, name: 'test' }).then(res => {
         this.get = res
       }).catch(err => {
         console.log(err)
       })
     },
-    statisticalForHome () {
-      statisticalForHome('/postIndex', {}).then(res => {
+    statisticalForHome() {
+      // multiPostFromDataRequest('/prizeList', { id: 1, name: 'test' }).then(res => {
+      statisticalForHome('/prizeList', { id: 1, name: 'test' }).then(res => {
         this.post = res
       }).catch(err => {
         console.log(err)
       })
     },
-    getList () {
+    getList() {
       statisticalForHome('/prizeList', {}).then(res => {
         // this.post = res
         console.log(res)
@@ -39,7 +40,7 @@ export default {
         console.log(err)
       })
     },
-    getPrize () {
+    getPrize() {
       statisticalForHome('/getPrize', {}).then(res => {
         // this.post = res
         console.log(res)

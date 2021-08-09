@@ -245,7 +245,7 @@ export default {
         data,
         headers: { 'Content-Type': 'multipart/form-data' }
       }).then(res => {
-        resolve(res)
+        resolve(res.data)
       }).catch(err => {
         reject(err)
       })

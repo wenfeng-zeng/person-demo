@@ -53,6 +53,7 @@ export default {
       const props = {
         zoom: 10,
         mapStyle: 'amap://styles/darkblue',
+        center: this.center
       }
       init('container', props).then(AMap => {
         _this.map = AMap

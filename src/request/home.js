@@ -12,6 +12,9 @@ export const getRequest = (url, data) => {
 export const getFullScreenInfo = (url, data) => {
   return axios.postFromDataRequest(url, data)
 }
+export const multiPostFromDataRequest = (url, data) => {
+  return axios.multiPostFromDataRequest(url, data)
+}
 // export const getRequest1 = (url, data) => {
 //   return axios.getRequest1(url, data)
 // }

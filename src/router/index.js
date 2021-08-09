@@ -89,6 +89,11 @@ export default new Router({
               name: 'echarts',
               component: () => import('@/view/demo/echartsList.vue')
             },
+            {
+              path: '/demo/webSocket',
+              name: 'webSocket',
+              component: () => import('@/view/demo/webSocket.vue')
+            },
           ]
         },
         {

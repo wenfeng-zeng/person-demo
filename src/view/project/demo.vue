@@ -8,7 +8,7 @@
       <el-tab-pane label="地图" name="map"></el-tab-pane>
       <el-tab-pane label="fullScreenDemo" name="fullScreenDemo"></el-tab-pane>
       <el-tab-pane label="arcgis" name="arcgis"></el-tab-pane>
-      <!-- <el-tab-pane label="web-view" name="web-view"></el-tab-pane> -->
+      <el-tab-pane label="webSocket" name="webSocket"></el-tab-pane>
     </el-tabs>
     <router-view />
   </div>
@@ -23,8 +23,7 @@ export default {
   },
   methods: {
     handleClick(el) {
-      console.log(el.index, el)
-      this.$router.push({ path: '/demo/' + el.name })
+      this.$router.push('/demo/' + el.name)
     }
   }
 }
