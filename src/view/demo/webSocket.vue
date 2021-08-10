@@ -35,7 +35,7 @@ export default {
   methods: {
     init() {
       const _this = this
-      this.socket = io('ws://127.0.0.1:8899')
+      this.socket = io('ws://127.0.0.1:8010')
       this.socket.on('connection', function(socket) {
       });
       this.socket.on('chat message', async function(msg) {
