@@ -1,7 +1,8 @@
 <template>
   <div class="webSocket">
-    <div class="charts_box">
-      <div v-for="(item,index) in list" :key="index" :class="['list',item.isOwn?'isOwn':'']">
+    <!-- <video autoplay="autoplay" muted loop="loop" src="artc://artcpull.yukong.live/yukong/23302_OPUS-RTS?auth_key=1628589897-0-0-0ce5a3150cf83895a5e2ed5f9e6ddd99"></video> -->
+    <div class="charts_box" ref="charts_box">
+      <div v-for="(item,index) in list" :key="index" :class="['list',item.isOwn?'isOwn':'',index=== list.length-1? 'style':'']">
         <span>
           <img :src="item.img" srcset="" v-if="!item.isOwn">
           <span>
@@ -37,16 +38,16 @@ export default {
       this.socket = io('ws://127.0.0.1:8899')
       this.socket.on('connection', function(socket) {
       });
-      this.socket.on('chat message', function(msg) {
-        console.log(msg);
-        _this.list.push({ label: msg, isOwn: false, img: auth })
-        // socket.emit('chat message', '回复' + msg);
+      this.socket.on('chat message', async function(msg) {
+        await _this.list.push({ label: msg.reply, isOwn: false, img: auth })
+        Array.from(document.getElementsByClassName('style'))[0].scrollIntoView();
       });
     },
-    onSearch() {
-      // this.keyWord = value
+    async onSearch() {
       this.list.push({ label: this.keyWord, isOwn: true, img: auth })
-      this.socket.emit('chat message', this.keyWord);
+      await this.socket.emit('chat message', this.keyWord);
+      this.keyWord = ''
+      Array.from(document.getElementsByClassName('style'))[0].scrollIntoView();
     },
   }
 }
@@ -55,6 +56,10 @@ export default {
 <style lang="less" scoped>
 .webSocket {
   padding: 20px;
+}
+video {
+  width: 500px;
+  height: 500px;
 }
 /deep/.input {
   width: 390px;
