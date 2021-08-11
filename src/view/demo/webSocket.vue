@@ -35,7 +35,8 @@ export default {
   methods: {
     init() {
       const _this = this
-      let urls = process.env.NODE_ENV === 'development' ? 'ws://127.0.0.1:8010' : 'wss://wfz-person.cn/socket'
+      let urls = process.env.NODE_ENV === 'development' ? 'ws://127.0.0.1:8010' : 'wss://wfz-person.cn'
+      // let urls = process.env.NODE_ENV === 'development' ? 'https://wfz-person.cn' : 'ws://127.0.0.1:8010'
       this.socket = io(urls)
       this.socket.on('connection', function(socket) {
       });
