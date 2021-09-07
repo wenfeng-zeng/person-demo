@@ -3,11 +3,12 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
-
+const cesiumSource = '../node_modules/cesium/Source' //定义 Cesium 源码路径
+const cesiumWorkers = path.join(cesiumSource, 'Workers');
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
-
+// const nodeExternals = require('webpack-node-externals'); //include this
 
 
 module.exports = {
@@ -15,20 +16,28 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  externals: {
+    'vue': 'Vue',
+    'VueRouter': 'VueRouter',
+    'element-ui': 'ELEMENT'
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+      : config.dev.assetsPublicPath,
+    sourcePrefix: ' '
   },
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      cesium: path.resolve(__dirname, cesiumSource)
     }
   },
+  // externals: [nodeExternals()], // just add this
   module: {
     rules: [
       {
@@ -69,7 +78,8 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ]
+    ],
+    unknownContextCritical: false,
   },
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

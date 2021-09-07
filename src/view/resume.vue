@@ -113,7 +113,8 @@
         <div ref="project" class="project">
           <h2>项目介绍</h2>
           <div class="project_box">
-            <div class="project_list" @click="handerToProject('account')">
+            <!-- <div class="project_list" @click="handerToProject('account')"> -->
+            <div class="project_list">
               <div class="project_list_bg">
                 <img src="../assets/bussine1.jpg" alt="" srcset="">
               </div>
@@ -121,7 +122,8 @@
                 <h3>共享经济综合服务平台</h3>
               </div>
             </div>
-            <div class="project_list" @click="handerToProject('payment')">
+            <!-- <div class="project_list" @click="handerToProject('payment')"> -->
+            <div class="project_list">
               <div class="project_list_bg">
                 <img src="../assets/bussine2.jpg" alt="" srcset="">
               </div>
@@ -285,6 +287,10 @@ export default {
       }
     },
     handerToProject(path) {
+      if(path==="fullScreenDemo"){
+        window.open('https://wfz-person.cn/dist/')
+        return false
+      }
       this.$router.push({ path: path })
     }
   }
