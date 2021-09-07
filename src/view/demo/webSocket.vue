@@ -53,10 +53,14 @@ export default {
     init() {
       const _this = this;
       // let urls = process.env.NODE_ENV === 'development' ? 'ws://127.0.0.1:8010' : 'wss://wfz-person.cn'
+      // let urls =
+      //   process.env.NODE_ENV === "development"
+      //     ? "wss://wfz-person.cn"
+      //     : "ws://127.0.0.1:8010";
       let urls =
         process.env.NODE_ENV === "development"
-          ? "wss://wfz-person.cn"
-          : "ws://127.0.0.1:8010";
+          ? "ws://127.0.0.1:8010"
+          : "ws://49.234.212.42:8010";
       this.socket = io(urls);
       this.socket.on("connection", function(socket) {});
       this.socket.on("chat message", async function(msg) {
