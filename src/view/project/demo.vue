@@ -9,7 +9,7 @@
       <el-tab-pane label="waterMarker" name="waterMarker"></el-tab-pane>
       <!-- <el-tab-pane label="arcgis" name="arcgis"></el-tab-pane> -->
       <el-tab-pane label="webSocket" name="webSocket"></el-tab-pane>
-      <el-tab-pane label="roomCharts" name="roomCharts"></el-tab-pane>
+      <!-- <el-tab-pane label="roomCharts" name="roomCharts"></el-tab-pane> -->
     </el-tabs>
     <router-view />
   </div>
