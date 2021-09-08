@@ -1,6 +1,5 @@
 // import Vue from 'vue'
 import App from './App'
-console.log(VueRouter);
 import routes from './router'
 const router = new VueRouter({
   routes
