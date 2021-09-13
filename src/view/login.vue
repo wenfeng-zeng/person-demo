@@ -29,7 +29,9 @@
         </div>
       </div>
       <div class="varchar">
-        <span>粤ICP备19153616号-1</span>
+        <span>
+          <a href="https://beian.miit.gov.cn/">粤ICP备19153616号</a>
+        </span>
       </div>
     </div>
   </div>

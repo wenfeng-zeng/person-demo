@@ -1,5 +1,10 @@
 <template>
   <div id="viewDiv">
+    <!-- <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul> -->
     <div>
       <span>原图:</span>
       <img
@@ -149,6 +154,9 @@ export default {
   // height: 500px;
   // width: 500px;
   padding-left: 50px;
+  // ul {
+  //   list-style: square inside;
+  // }
   > div {
     display: flex;
     span {
