@@ -30,7 +30,7 @@
       </div>
       <div class="varchar">
         <span>
-          <a href="https://beian.miit.gov.cn/">粤ICP备19153616号</a>
+          <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备19153616号</a>
         </span>
       </div>
     </div>
@@ -133,6 +133,9 @@ export default {
       left: 50%;
       transform: translateX(-50%);
       color: #9e9e9e;
+      a{
+              color: #9e9e9e;
+      }
     }
   }
 }
