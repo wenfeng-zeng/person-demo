@@ -27,7 +27,7 @@ export const init = (container, props) => {
  * @param {Object} otherProps 其他参数，如有需要的话 具体api见https://lbs.amap.com/api/javascript-api/reference/location#m_AMap.Geolocation
  */
 export const getCurrentPosition = (map, success, fail, otherProps) => {
-  AMap.plugin('AMap.Geolocation', function() {
+  AMap.plugin('AMap.Geolocation', function () {
     var geolocation = new AMap.Geolocation({
       enableHighAccuracy: false,//是否使用高精度定位，默认:true
       timeout: 10000,          //超过10秒后停止定位，默认：无穷大
@@ -47,11 +47,11 @@ export const getCurrentPosition = (map, success, fail, otherProps) => {
     geolocation.getCurrentPosition()
     AMap.event.addListener(geolocation, 'complete', onComplete)
     AMap.event.addListener(geolocation, 'error', onError)
-    function onComplete(data) {
+    function onComplete (data) {
       // data是具体的定位信息
       success(data)
     }
-    function onError(err) {
+    function onError (err) {
       // 定位出错
       fail(err)
     }
@@ -67,6 +67,7 @@ export const getCurrentPosition = (map, success, fail, otherProps) => {
  * @returns 点标记集合markers
  */
 export const addMarker = (map, marker, callback) => {
+  console.log(map, marker);
   var markers = marker.map(e => {
     var mark = new AMap.Marker({
       position: [e.lng, e.lat],   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
@@ -93,13 +94,13 @@ export const removeMarker = (map, marker) => {
  */
 export const initScaleTools = (map, noScale, noToolBar) => {
   if (!noScale) {
-    map.plugin(["AMap.Scale"], function() {
+    map.plugin(["AMap.Scale"], function () {
       var scale = new AMap.Scale();
       map.addControl(scale);
     });
   }
   if (!noToolBar) {
-    map.plugin(["AMap.ToolBar"], function() {
+    map.plugin(["AMap.ToolBar"], function () {
       //加载工具条
       var tool = new AMap.ToolBar();
       map.addControl(tool);
@@ -130,7 +131,7 @@ export const showInfoWindow = (map, center, content) => {
  */
 export const searchNearBy = (map, center, callback, otherProps, keyword, radius) => {
   map.clearMap()
-  AMap.plugin(['AMap.PlaceSearch'], function() {
+  AMap.plugin(['AMap.PlaceSearch'], function () {
     var placeSearch = new AMap.PlaceSearch({
       map: map,
       ...otherProps
@@ -149,7 +150,7 @@ export const searchNearBy = (map, center, callback, otherProps, keyword, radius)
  */
 export const searchByKeyword = (map, callback, otherProps, keyword) => {
   map.clearMap()
-  AMap.plugin(['AMap.PlaceSearch'], function() {
+  AMap.plugin(['AMap.PlaceSearch'], function () {
     var placeSearch = new AMap.PlaceSearch({
       map: map,
       ...otherProps,
@@ -171,7 +172,7 @@ export const searchByKeyword = (map, callback, otherProps, keyword) => {
  * @param {Object}  otherProps 构造函数其他参数，详见https://lbs.amap.com/api/javascript-api/reference/route-search#m_TransferResult
  */
 export const transfer = (map, startLngLat, endLngLat, city, callback, panel, isLngLat = true, startName, endName, otherProps) => {
-  AMap.plugin('AMap.Transfer', function() {
+  AMap.plugin('AMap.Transfer', function () {
     var transOptions = {
       map,
       city: city || '广州市',
@@ -181,11 +182,11 @@ export const transfer = (map, startLngLat, endLngLat, city, callback, panel, isL
     };
     var transfer = new AMap.Transfer(transOptions);
     if (isLngLat) {
-      transfer.search(startLngLat, endLngLat, function(status, result) {
+      transfer.search(startLngLat, endLngLat, function (status, result) {
         callback && callback(status, result, transfer)
       })
     } else {
-      transfer.search([{ keyword: startName }, { keyword: endName }], function(status, result) {
+      transfer.search([{ keyword: startName }, { keyword: endName }], function (status, result) {
         callback && callback(status, result, transfer)
       })
     }
@@ -205,7 +206,7 @@ export const transfer = (map, startLngLat, endLngLat, city, callback, panel, isL
  * @param {Object} otherProps 其他属性
  */
 export const walking = (map, startLngLat, endLngLat, city, callback, panel, isLngLat = true, startName, endName, otherProps) => {
-  AMap.plugin('AMap.Walking', function() {
+  AMap.plugin('AMap.Walking', function () {
     var transOptions = {
       map,
       city: city || '广州市',
@@ -214,11 +215,11 @@ export const walking = (map, startLngLat, endLngLat, city, callback, panel, isLn
     };
     var warking = new AMap.Walking(transOptions);
     if (isLngLat) {
-      warking.search(startLngLat, endLngLat, function(status, result) {
+      warking.search(startLngLat, endLngLat, function (status, result) {
         callback && callback(status, result, warking)
       })
     } else {
-      warking.search([{ keyword: startName }, { keyword: endName }], function(status, result) {
+      warking.search([{ keyword: startName }, { keyword: endName }], function (status, result) {
         callback && callback(status, result, warking)
       })
     }
@@ -240,12 +241,12 @@ export const clearLine = (lineStrory) => {
  * @param {Object} otherProps 其他参数
  */
 export const getAddressByLngLat = (LngLat, callback, otherProps) => {
-  AMap.plugin('AMap.Geocoder', function() {
+  AMap.plugin('AMap.Geocoder', function () {
     var geocoder = new AMap.Geocoder({
       ...otherProps
     })
 
-    geocoder.getAddress(LngLat, function(status, result) {
+    geocoder.getAddress(LngLat, function (status, result) {
       callback(status, result)
     })
   })

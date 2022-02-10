@@ -116,7 +116,7 @@
             <!-- <div class="project_list" @click="handerToProject('account')"> -->
             <div class="project_list">
               <div class="project_list_bg">
-                <img src="../assets/bussine1.jpg" alt="" srcset="">
+                <img src="https://picsum.photos/300/200?random=1" alt="" srcset="">
               </div>
               <div class="project_list_info">
                 <h3>共享经济综合服务平台</h3>
@@ -125,7 +125,7 @@
             <!-- <div class="project_list" @click="handerToProject('payment')"> -->
             <div class="project_list">
               <div class="project_list_bg">
-                <img src="../assets/bussine2.jpg" alt="" srcset="">
+                <img src="https://picsum.photos/300/200?random=2" alt="" srcset="">
               </div>
               <div class="project_list_info">
                 <h3>容易付</h3>
@@ -133,7 +133,7 @@
             </div>
             <div class="project_list">
               <div class="project_list_bg">
-                <img src="../assets/bussine3.jpg" alt="" srcset="">
+                <img src="https://picsum.photos/300/200?random=3" alt="" srcset="">
               </div>
               <div class="project_list_info">
                 <h3>个人网站(本网站)</h3>
@@ -144,7 +144,7 @@
             </div>
             <div class="project_list" @click="handerToProject('demo')">
               <div class="project_list_bg">
-                <img src="../assets/demo_bg.jpg" alt="" srcset="">
+                <img src="https://picsum.photos/300/200?random=4" alt="" srcset="">
               </div>
               <div class="project_list_info">
                 <h3>平常小demo</h3>
@@ -152,7 +152,7 @@
             </div>
             <div class="project_list" @click="handerToProject('fullScreenDemo')">
               <div class="project_list_bg">
-                <img src="../assets/demo_bg.jpg" alt="" srcset="">
+                <img src="https://picsum.photos/300/200?random=5" alt="" srcset="">
               </div>
               <div class="project_list_info">
                 <h3>大屏demo</h3>
@@ -310,7 +310,8 @@ export default {
     position: relative;
     height: 700px;
     .bg {
-      background: url("../assets/bg1.jpg") no-repeat center;
+      // background: url("../assets/bg1.jpg") no-repeat center;
+      background: url("https://picsum.photos/1920/700?blur=2") no-repeat center;
       background-size: cover;
       height: 700px;
       width: 100%;

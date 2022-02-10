@@ -58,7 +58,7 @@
 // import Amap from '@/components/mapComponent'
 // import AMapLoader from '@amap/amap-jsapi-loader';
 import auth from '@/assets/auth.png'
-import { init, getCurrentPosition, addMarker, initScaleTools, removeMarker, transfer, walking, clearLine, searchByKeyword, searchNearBy, getAddressByLngLat } from "@/utils/map.js"
+import { init, getCurrentPosition, addMarker, initScaleTools, removeMarker, showInfoWindow, transfer, walking, clearLine, searchByKeyword, searchNearBy, getAddressByLngLat } from "@/utils/map.js"
 // import mapJS from "@/utils/map.js"
 // const icon = new AMap.Icon({
 //   image: auth,
@@ -66,7 +66,7 @@ import { init, getCurrentPosition, addMarker, initScaleTools, removeMarker, tran
 //   imageSize: new AMap.Size(30, 30)
 // })
 export default {
-  data() {
+  data () {
     return {
       map: null,
       center: [],
@@ -84,7 +84,7 @@ export default {
       icon: ''
     }
   },
-  mounted() {
+  mounted () {
     const _this = this
     this.initMap()
     // _this.map = new AMap.Map('container', {
@@ -98,7 +98,7 @@ export default {
     // }, () => { }, {})
   },
   methods: {
-    async initMap() {
+    async initMap () {
       const _this = this
       // AMapLoader.load({
       //   "key": "0bea50b4d93ba7cbb1325e705f2010da",
@@ -151,14 +151,14 @@ export default {
         this.$message.error(err);
       })
     },
-    markerClick(eventName, handler, context) {
-      // showInfoWindow(this.map, [eventName.lnglat.lng, eventName.lnglat.lat], '123123')
-      this.$message.success(eventName.lnglat.lng + ',' + eventName.lnglat.lat)
+    markerClick (eventName, handler, context) {
+      showInfoWindow(this.map, [eventName.lnglat.lng, eventName.lnglat.lat], '123123')
+      // this.$message.success(eventName.lnglat.lng + ',' + eventName.lnglat.lat)
     },
-    initScaleTools() {
+    initScaleTools () {
       initScaleTools(this.map)
     },
-    searchNearBy(pageNum, pageSize, keyWord, center) {
+    searchNearBy (pageNum, pageSize, keyWord, center) {
       if (!this.showNearBy) this.showNearBy = !this.showNearBy
       this.type = 'searchNearBy'
       searchNearBy(this.map, center ? center : this.center, (status, result) => {
@@ -170,7 +170,7 @@ export default {
       addMarker(this.map, [{ lng: this.center[0], lat: this.center[1], otherProps: { title: '广州', icon: this.icon, draggable: true } }], this.markerClick)
 
     },
-    searchByKeyword(pageNum, pageSize) {
+    searchByKeyword (pageNum, pageSize) {
       if (!this.showNearBy) this.showNearBy = !this.showNearBy
       this.type = 'searchByKeyword'
       searchByKeyword(this.map, (status, result) => {
@@ -182,55 +182,61 @@ export default {
       addMarker(this.map, [{ lng: this.center[0], lat: this.center[1], otherProps: { title: '广州', icon: this.icon, draggable: true } }], this.markerClick)
 
     },
-    handleSizeChange(val) {
+    handleSizeChange (val) {
       this.pageNum = 1
       this.pageSize = val
       this.type === 'searchByKeyword' ? this.searchByKeyword(this.pageNum, this.pageSize) : this.searchNearBy(this.pageNum, this.pageSize)
     },
-    handleCurrentChange(val) {
+    handleCurrentChange (val) {
       this.pageNum = val
       // this.searchByKeyword(this.pageNum, this.pageSize)
       this.type === 'searchByKeyword' ? this.searchByKeyword(this.pageNum, this.pageSize) : this.searchNearBy(this.pageNum, this.pageSize)
 
     },
-    callback(status, result, lineStrory) {
-      this.lineStrory = lineStrory
+    callback (status, result, lineStrory) {
+      console.log(status, result, lineStrory);
+      if (status === 'complete') {
+        this.lineStrory = lineStrory
+      } else {
+        this.$message.error(result)
+      }
     },
-    clickHandler(e) {
-      this.$message.success(e.lnglat.getLng() + ',' + e.lnglat.getLat())
+    clickHandler (e) {
+      // this.$message.success(e.lnglat.getLng() + ',' + e.lnglat.getLat())
 
-      // getAddressByLngLat([e.lnglat.getLng(), e.lnglat.getLat()], (status, res) => {
-      //   if (res.info === 'OK') {
-      //     const content = '<i style="color:red;font-size:28px;" class="el-icon-s-flag"></i>'
-      //     this.markerList.push(...addMarker(this.map, [{ lng: e.lnglat.getLng(), lat: e.lnglat.getLat(), otherProps: { title: res.regeocode.formattedAddress, content: content } }], (eventName, handler, context) => {
-      //       if (!this.showNearBy) this.showNearBy = !this.showNearBy
-      //       this.total = 1
-      //       this.tableData = [
-      //         {
-      //           name: res.regeocode.formattedAddress,
-      //           address: res.regeocode.formattedAddress,
-      //           location: {
-      //             lng: e.lnglat.getLng(),
-      //             lat: e.lnglat.getLat()
-      //           }
-      //         }
-      //       ]
-      //     }))
-      //   }
-      // })
+      getAddressByLngLat([e.lnglat.getLng(), e.lnglat.getLat()], (status, res) => {
+        if (res.info === 'OK') {
+          const content = '<i style="color:red;font-size:28px;" class="el-icon-s-flag"></i>'
+          this.markerList.push(...addMarker(this.map, [{ lng: e.lnglat.getLng(), lat: e.lnglat.getLat(), otherProps: { title: res.regeocode.formattedAddress, content: content } }], (eventName, handler, context) => {
+            if (!this.showNearBy) this.showNearBy = !this.showNearBy
+            this.total = 1
+            this.tableData = [
+              {
+                name: res.regeocode.formattedAddress,
+                address: res.regeocode.formattedAddress,
+                location: {
+                  lng: e.lnglat.getLng(),
+                  lat: e.lnglat.getLat()
+                }
+              }
+            ]
+          }))
+        }
+      })
     },
-    goto(item, type) {
+    goto (item, type) {
       const { location } = item
+      console.log(location, item, this.center, [location.lng, location.lat]);
       if (type === 'bus') {
         if (this.lineStrory) clearLine(this.lineStrory)
-        transfer(this.map, this.center, [location.lng, location.lat], '', this.callback)
+        transfer(this.map, this.center, [location.lng, location.lat], item.cityname, this.callback)
         // transfer(this.map, this.center, [113.45521, 23.166382], '', this.callback, '', false, '磨碟沙', '溢信科技')
       } else {
         if (this.lineStrory) clearLine(this.lineStrory)
         walking(this.map, this.center, [location.lng, location.lat], '', this.callback)
       }
     },
-    removeMarker() {
+    removeMarker () {
       removeMarker(this.map, this.markerList)
     }
   }
